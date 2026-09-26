@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lamorena Beauty Co. | Tienda Oficial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --amarillo-pastel: #FFF5CC;
+            --amarillo-suave: #FFE9A8;
+            --amarillo-dorado: #E6C878;
+            --rosa-pastel: #FFE4E1;
+            --rosa-suave: #FFD1DC;
+            --rosa-fuerte: #F7A8B8;
+            --blanco-crema: #FFFDF9;
+            --blanco: #FFFFFF;
+            --texto-oscuro: #4A403A;
+            --texto-suave: #8A7F78;
+            --sombra-suave: rgba(230, 200, 120, 0.15);
+            --sombra-fuerte: rgba(247, 168, 184, 0.25);
+            --verde-whatsapp: #25D366;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: linear-gradient(135deg, #FFFDF9 0%, #FFF5CC 40%, #FFE4E1 100%);
+            background-attachment: fixed;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--texto-oscuro);
+            min-height: 100vh;
+            padding: 30px 20px 120px;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 50px 30px;
+            background: var(--blanco);
+            border-radius: 30px;
+            box-shadow: 0 20px 50px var(--sombra-suave);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(230, 200, 120, 0.3);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 233, 168, 0.3) 0%, transparent 60%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .welcome-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--texto-oscuro);
+            margin-bottom: 10px;
+            font-style: italic;
+            font-weight: 600;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .sub-welcome {
+            font-size: 0.85rem;
+            color: var(--rosa-fuerte);
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            font-weight: 400;
+            position: relative;
+            z-index: 2;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .cat-btn {
+            background: var(--blanco);
+            border: 2px solid var(--amarillo-suave);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            color: var(--texto-oscuro);
+            box-shadow: 0 5px 15px rgba(255, 233, 168, 0.4);
+        }
+
+        .cat-btn:hover, .cat-btn.active {
+            background: linear-gradient(135deg, var(--amarillo-pastel), var(--rosa-pastel));
+            border-color: var(--rosa-fuerte);
+            color: var(--texto-oscuro);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px var(--sombra-fuerte);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--blanco);
+            border-radius: 25px;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            box-shadow: 0 15px 35px rgba(255, 233, 168, 0.3);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid rgba(255, 209, 220, 0.5);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--amarillo-dorado), var(--rosa-fuerte), var(--amarillo-dorado));
+            z-index: 3;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px var(--sombra-fuerte);
+            border-color: var(--amarillo-dorado);
+        }
+
+        .product-image-container {
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--amarillo-pastel) 0%, var(--rosa-pastel) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .product-icon-placeholder {
+            font-size: 5rem;
+            color: var(--amarillo-dorado);
+            opacity: 0.5;
+            position: absolute;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.08);
+        }
+
+        .product-info {
+            padding: 25px 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            text-align: center;
+            background: var(--blanco);
+        }
+
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--texto-oscuro);
+            margin-bottom: 10px;
+            font-weight: 600;
+            line-height: 1.3;
+            letter-spacing: 0.5px;
+        }
+
+        .product-desc {
+            font-size: 0.75rem;
+            color: var(--texto-suave);
+            margin-bottom: 18px;
+            line-height: 1.5;
+            flex-grow: 1;
+            font-weight: 400;
+        }
+
+        .product-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--rosa-fuerte);
+            margin-bottom: 18px;
+        }
+
+        .btn-add {
+            background: linear-gradient(135deg, var(--amarillo-pastel), var(--amarillo-suave));
+            color: var(--texto-oscuro);
+            border: none;
+            padding: 14px 20px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.4s;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(255, 233, 168, 0.5);
+        }
+
+        .btn-add:hover {
+            background: linear-gradient(135deg, var(--rosa-pastel), var(--rosa-suave));
+            color: var(--texto-oscuro);
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px var(--sombra-fuerte);
+        }
+
+        .cart-float {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--rosa-pastel), var(--rosa-suave));
+            color: var(--texto-oscuro);
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 15px 40px var(--sombra-fuerte);
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.4s;
+            z-index: 1000;
+            border: 2px solid var(--blanco);
+        }
+
+        .cart-float:hover {
+            transform: translateX(-50%) scale(1.05);
+            background: linear-gradient(135deg, var(--amarillo-pastel), var(--amarillo-suave));
+            box-shadow: 0 20px 50px var(--sombra-suave);
+        }
+
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(74, 64, 58, 0.4);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .cart-modal.active { display: flex; }
+
+        .cart-content {
+            background: var(--blanco-crema);
+            border-radius: 30px;
+            padding: 40px;
+            width: 100%;
+            max-width: 520px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 30px 60px rgba(74, 64, 58, 0.2);
+            animation: slideUp 0.5s ease;
+            border: 2px solid var(--amarillo-pastel);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(60px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .cart-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--texto-oscuro);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--amarillo-pastel);
+        }
+
+        .cart-item-info { flex: 1; padding-right: 15px; }
+        .cart-item-name { font-weight: 600; font-size: 0.9rem; color: var(--texto-oscuro); }
+        .cart-item-price { font-size: 0.8rem; color: var(--texto-suave); font-weight: 400; }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .qty-btn {
+            background: var(--amarillo-pastel);
+            border: none;
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--texto-oscuro);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty-btn:hover { background: var(--rosa-fuerte); color: white; transform: scale(1.1); }
+
+        .cart-item-qty {
+            font-weight: 700;
+            min-width: 25px;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--rosa-fuerte);
+            margin: 30px 0;
+            padding-top: 20px;
+            border-top: 2px dashed var(--amarillo-dorado);
+        }
+
+        .cart-actions {
+            display: flex;
+            gap: 12px;
+            flex-direction: column;
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, var(--rosa-pastel), var(--rosa-suave));
+            color: var(--texto-oscuro);
+            border: none;
+            padding: 16px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.4s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 10px 25px var(--sombra-fuerte);
+        }
+
+        .btn-whatsapp:hover { 
+            background: linear-gradient(135deg, var(--amarillo-pastel), var(--amarillo-suave));
+            transform: scale(1.02); 
+            box-shadow: 0 15px 35px var(--sombra-suave);
+        }
+
+        .btn-close {
+            background: transparent;
+            color: var(--texto-suave);
+            border: 2px solid var(--amarillo-pastel);
+            padding: 14px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-close:hover { border-color: var(--rosa-fuerte); color: var(--rosa-fuerte); }
+
+        .empty-cart {
+            text-align: center;
+            color: var(--texto-suave);
+            padding: 40px 0;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .info-section {
+            background: var(--blanco);
+            border-radius: 30px;
+            padding: 50px 30px;
+            margin-top: 60px;
+            box-shadow: 0 15px 35px var(--sombra-suave);
+            border: 1px solid var(--amarillo-pastel);
+        }
+
+        .info-section h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--texto-oscuro);
+            margin-bottom: 40px;
+            font-size: 1.8rem;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+
+        .info-item {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--amarillo-pastel) 0%, var(--rosa-pastel) 100%);
+            border-radius: 20px;
+            transition: all 0.4s;
+        }
+
+        .info-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px var(--sombra-suave);
+        }
+
+        .info-item h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--texto-oscuro);
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .info-item p {
+            font-size: 0.8rem;
+            color: var(--texto-oscuro);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 20px 15px 120px; }
+            .welcome-text { font-size: 2rem; }
+            .sub-welcome { letter-spacing: 5px; font-size: 0.7rem; }
+            .header { padding: 35px 20px; }
+            .products-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
+            .product-image-container { height: 180px; }
+            .product-info { padding: 15px 10px; }
+            .product-name { font-size: 0.9rem; }
+            .product-price { font-size: 1.2rem; }
+            .btn-add { font-size: 0.6rem; padding: 12px 10px; letter-spacing: 1px; }
+            .cart-content { padding: 25px 20px; }
+            .cart-float { padding: 14px 25px; font-size: 0.7rem; }
+            .info-section { padding: 30px 20px; }
+            .info-section h3 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="welcome-text">Bienvenidos a Lamorena</h1>
+            <p class="sub-welcome">Beauty Co.</p>
+        </div>
+
+        <div class="categories">
+            <button class="cat-btn active" onclick="filterCategory('all', this)">Todos</button>
+            <button class="cat-btn" onclick="filterCategory('skincare', this)">Skincare</button>
+            <button class="cat-btn" onclick="filterCategory('maquillaje', this)">Maquillaje</button>
+            <button class="cat-btn" onclick="filterCategory('labios', this)">Labios</button>
+        </div>
+
+        <div class="products-grid" id="productsGrid"></div>
+
+        <div class="info-section">
+            <h3>¿Cómo comprar?</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <h4>01. Elige</h4>
+                    <p>Agrega al carrito los productos que desees.</p>
+                </div>
+                <div class="info-item">
+                    <h4>02. Envía</h4>
+                    <p>Haz clic en "Finalizar Pedido" y se abrirá WhatsApp con tu lista.</p>
+                </div>
+                <div class="info-item">
+                    <h4>03. Confirma</h4>
+                    <p>Indica si requieres envío a domicilio o recoges en sucursal.</p>
+                </div>
+                <div class="info-item">
+                    <h4>04. Paga</h4>
+                    <p>Transferencia o efectivo. Envía tu comprobante para confirmar.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="cart-float" id="cartFloat" onclick="openCart()">
+        🛒 Ver Carrito (<span id="cartCount">0</span>) - $<span id="cartTotalFloat">0</span>
+    </button>
+
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <h2 class="cart-title">Tu Pedido</h2>
+            <div id="cartItemsContainer"></div>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span>$<span id="cartTotal">0</span></span>
+            </div>
+            <div class="cart-actions">
+                <button class="btn-whatsapp" onclick="sendWhatsApp()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/>
+                    </svg>
+                    Finalizar Pedido por WhatsApp
+                </button>
+                <button class="btn-close" onclick="closeCart()">Seguir Comprando</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // ✅ PRODUCTOS CON TODAS LAS IMÁGENES ✅
+        // ============================================================
+        
+        const productos = [
+            {
+                id: 1,
+                nombre: "Bloqueador Solar Mixsoon Bean Sun Serum SPF 50+",
+                descripcion: "Protección SPF 50+ PA++++. Hidrata y calma con textura ligera. Centella Asiática + Ácido Hialurónico.",
+                precio: 70000,
+                categoria: "skincare",
+                imagen: "https://www.flawlesstore.com.co/cdn/shop/files/250121mixsoon42165_1.webp?v=1778707358&width=3840"
+            },
+            {
+                id: 2,
+                nombre: "Bloqueador Solar Skin1004 Madagascar Centella",
+                descripcion: "Protección SPF 50. Textura ligera, acabado luminoso sin rastro blanco. Centella + Ácido Hialurónico.",
+                precio: 80000,
+                categoria: "skincare",
+                imagen: "https://www.flawlesstore.com.co/cdn/shop/files/skin1004-madagascar-centella-tone-brightening-tone-up-sunscreen-37793801601270_1440x_80c64c55-143f-4b74-a7.webp?v=1778688891"
+            },
+            {
+                id: 3,
+                nombre: "Fijador de Maquillaje Cica-Tree Shaking Glow Sun Fixer SPF 50+",
+                descripcion: "Fija tu maquillaje mientras refresca, hidrata y protege. Árbol de Té + Centella Asiática.",
+                precio: 60000,
+                categoria: "skincare",
+                imagen: ""
+            },
+            {
+                id: 4,
+                nombre: "Skin1004 Madagascar Centella Ampoule Kit",
+                descripcion: "4 ampollas: calmante, anti-acné, iluminadora y para poros. (Dos serums disponibles).",
+                precio: 40000,
+                categoria: "skincare",
+                imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG825GTKxaZbM6lj6x7l1yzHBJFyzDR52HktJvd-3tRQ&s=10"
+            },
+            {
+                id: 5,
+                nombre: "Madagascar Centella Hyalu-Cica Silky-Fit Sun Stick",
+                descripcion: "Barra solar SPF50+ PA++++. Acabado sedoso, sin residuo blanco. (Precio preventa).",
+                precio: 55000,
+                categoria: "skincare",
+                imagen: "https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/sio/sio83021/y/18.jpg"
+            },
+            {
+                id: 6,
+                nombre: "Centella Poremizing Quick Clay Stick Mask",
+                descripcion: "Mascarilla de arcilla en barra. Limpia poros, absorbe grasa. Centella + Caolín.",
+                precio: 70000,
+                categoria: "skincare",
+                imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp865JOADLyuWVIVHz1xK61tquaa0j9-L7RuxHiCed6SQZM6eMtFTz2q8&s=10"
+            },
+            {
+                id: 7,
+                nombre: "COSRX Low pH Good Morning Gel Cleanser (150ml)",
+                descripcion: "Gel limpiador de bajo pH. Ácido betulínico + Té verde. Ideal pieles mixtas/acnéicas.",
+                precio: 65000,
+                categoria: "skincare",
+                imagen: "https://my-kare.com/cdn/shop/files/COSRX-Low-pH-Good-Morning-Gel-Cleanser-2_1200x.jpg?v=1740241317"
+            },
+            {
+                id: 8,
+                nombre: "Rubor Líquido Trendy Star",
+                descripcion: "Fórmula ligera, acabado natural mate. Tonos: 03, 04, 05.",
+                precio: 16000,
+                categoria: "maquillaje",
+                imagen: "https://b2ctrendy.vtexassets.com/assets/vtex.file-manager-graphql/images/1506d358-d898-490c-8aee-fc206ddb14de___0d1ad08aa79b269b91ada9b7ac4ef1c7.jpg"
+            },
+            {
+                id: 9,
+                nombre: "Rubor en Crema Trendy by Camila Orrego (Rubor Vergüenza)",
+                descripcion: "Acabado natural y luminoso. Manteca de karité + Vitamina E.",
+                precio: 20000,
+                categoria: "maquillaje",
+                imagen: "https://http2.mlstatic.com/D_NQ_NP_961801-MLA106669725290_022026-O.webp"
+            },
+            {
+                id: 10,
+                nombre: "Kit de Cejas Trendy by Camila Orrego",
+                descripcion: "Paleta 2 en 1 con pomada y sombras. Incluye aplicador. Tonos claros y oscuros.",
+                precio: 15000,
+                categoria: "maquillaje",
+                imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjLyp5ZXq0bJPwbd5TFB-ceRAYQRptKubUvNqkaSQHnw&s=10"
+            },
+            {
+                id: 11,
+                nombre: "Trendy Super Corrector",
+                descripcion: "Alta cobertura, acabado semi-mate. Agentes hidratantes. Tono 04.",
+                precio: 20000,
+                categoria: "maquillaje",
+                imagen: "https://http2.mlstatic.com/D_NQ_NP_961801-MLA106669725290_022026-O.webp"
+            },
+            {
+                id: 12,
+                nombre: "Corrector de Soleva",
+                descripcion: "Cobertura media a total, acabado natural. Hidratante + Vitamina E. Tono 0.5n.",
+                precio: 27000,
+                categoria: "maquillaje",
+                imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtHcuQ2lIWUNrVnYdkamC6ny0vuuG0PcaqHP8T8CU5zg&s=10"
+            },
+            {
+                id: 13,
+                nombre: "Bloomshell My Concealer (20ml)",
+                descripcion: "Cobertura media, acabado natural. Vitamina E + Ácido Hialurónico. Tonos 05-08.",
+                precio: 24000,
+                categoria: "maquillaje",
+                imagen: "https://mysticstore.com.co/wp-content/uploads/2025/07/My-concealer-big-20-ml-NATURAL-BloomShell.png"
+            },
+            {
+                id: 14,
+                nombre: "Contorno Bloom Cream Sculpt Bloomshell",
+                descripcion: "Paleta 2 en 1 en crema y polvo. Pigmentos modulables. Tonos: Deep, Toasted.",
+                precio: 30000,
+                categoria: "maquillaje",
+                imagen: "https://bonitaexpress.co/wp-content/uploads/2024/10/Bloom-Cream-contorno-en-duo-bloomshell-toasted.jpg"
+            },
+            {
+                id: 15,
+                nombre: "Paleta Bloom Tropical Luminous – Bronzer y Contorno",
+                descripcion: "Dos tonos de contorno en polvo. Acabado mate natural. Tono 02.",
+                precio: 30000,
+                categoria: "maquillaje",
+                imagen: "https://bloomshell.co/wp-content/uploads/2026/08/Pagina-web-2-8.png"
+            },
+            {
+                id: 16,
+                nombre: "Contorno Queen Trendy by Camila Orrego",
+                descripcion: "Contorno líquido en crema. Fórmula cremosa para esculpir.",
+                precio: 20000,
+                categoria: "maquillaje",
+                imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpAr2J45L3x9j7jyeTqt3TiSoy23C66FqCMvoWlfSBXA&s=10"
+            },
+            {
+                id: 17,
+                nombre: "Lip Oil Sandía – Trendy by Camila Orrego",
+                descripcion: "Aceite labial glossy, aroma sandía. Vitamina E + Aceites emolientes. Tonos 04, 06.",
+                precio: 15000,
+                categoria: "labios",
+                imagen: "https://tucatalogodemaquillaje.com/wp-content/uploads/2025/11/lip-oil-sandia-trendy.jpg"
+            },
+            {
+                id: 18,
+                nombre: "Brillo de Labios HoloGlam - Trendy",
+                descripcion: "Gloss con destellos holográficos. 4 tonos. Partículas holográficas + Aceites.",
+                precio: 15000,
+                categoria: "labios",
+                imagen: "https://http2.mlstatic.com/D_NQ_NP_611854-MCO109218117590_042026-O.webp"
+            },
+            {
+                id: 19,
+                nombre: "Brillo Cherry Shine Trendy by Camila Orrego",
+                descripcion: "Gloss brillante, aroma cereza. Varios tonos. Agentes humectantes + Aceites.",
+                precio: 12000,
+                categoria: "labios",
+                imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK7bZTOj4OKF4o04cvmN6u9TbIA4DK1wzD_U_lq85HgQ&s"
+            }
+        ];
+
+        // ============================================================
+        // ✅ NÚMERO DE WHATSAPP CONFIGURADO ✅
+        // ============================================================
+        // Tu número: 333 226 7596
+        // Con código de país (Colombia +57): 573332267596
+        const numeroWhatsApp = "573332267596"; 
+
+        let carrito = [];
+        let categoriaActual = 'all';
+
+        function renderProductos() {
+            const grid = document.getElementById('productsGrid');
+            const filtrados = categoriaActual === 'all' 
+                ? productos 
+                : productos.filter(p => p.categoria === categoriaActual);
+
+            if (filtrados.length === 0) {
+                grid.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color:#8A7F78; padding:60px; font-weight:400;">No hay productos en esta categoría.</p>';
+                return;
+            }
+
+            grid.innerHTML = filtrados.map(p => {
+                let contenidoImagen = '';
+                if (p.imagen && p.imagen.trim() !== "") {
+                    contenidoImagen = `<img src="${p.imagen}" alt="${p.nombre}" class="product-image" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">`;
+                }
+                
+                return `
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <div class="product-icon-placeholder" style="${p.imagen ? 'display:none;' : 'display:block;'}">🧴</div>
+                        ${contenidoImagen}
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">${p.nombre}</h3>
+                        <p class="product-desc">${p.descripcion}</p>
+                        <div class="product-price">$${p.precio.toLocaleString('es-CO')}</div>
+                        <button class="btn-add" onclick="agregarAlCarrito(${p.id})">Agregar al Carrito</button>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function filterCategory(cat, btn) {
+            categoriaActual = cat;
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderProductos();
+        }
+
+        function agregarAlCarrito(id) {
+            const producto = productos.find(p => p.id === id);
+            const itemExistente = carrito.find(item => item.id === id);
+
+            if (itemExistente) {
+                itemExistente.cantidad++;
+            } else {
+                carrito.push({ ...producto, cantidad: 1 });
+            }
+            actualizarCarrito();
+            
+            const btn = event.target;
+            const textoOriginal = btn.textContent;
+            btn.textContent = '¡Agregado! ✓';
+            btn.style.background = '#25D366';
+            btn.style.color = '#fff';
+            setTimeout(() => {
+                btn.textContent = textoOriginal;
+                btn.style.background = '';
+                btn.style.color = '';
+            }, 1200);
+        }
+
+        function cambiarCantidad(id, delta) {
+            const item = carrito.find(i => i.id === id);
+            if (!item) return;
+            item.cantidad += delta;
+            if (item.cantidad <= 0) {
+                carrito = carrito.filter(i => i.id !== id);
+            }
+            actualizarCarrito();
+        }
+
+        function actualizarCarrito() {
+            const totalItems = carrito.reduce((sum, i) => sum + i.cantidad, 0);
+            const totalPrecio = carrito.reduce((sum, i) => sum + (i.precio * i.cantidad), 0);
+
+            document.getElementById('cartCount').textContent = totalItems;
+            document.getElementById('cartTotalFloat').textContent = totalPrecio.toLocaleString('es-CO');
+            document.getElementById('cartTotal').textContent = totalPrecio.toLocaleString('es-CO');
+
+            const floatBtn = document.getElementById('cartFloat');
+            if (totalItems > 0) {
+                floatBtn.style.display = 'flex';
+            } else {
+                floatBtn.style.display = 'none';
+            }
+
+            const container = document.getElementById('cartItemsContainer');
+            if (carrito.length === 0) {
+                container.innerHTML = '<p class="empty-cart">Tu carrito está vacío 🛒</p>';
+            } else {
+                container.innerHTML = carrito.map(item => `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.nombre}</div>
+                            <div class="cart-item-price">$${item.precio.toLocaleString('es-CO')} c/u</div>
+                        </div>
+                        <div class="cart-item-controls">
+                            <button class="qty-btn" onclick="cambiarCantidad(${item.id}, -1)">−</button>
+                            <span class="cart-item-qty">${item.cantidad}</span>
+                            <button class="qty-btn" onclick="cambiarCantidad(${item.id}, 1)">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function openCart() { document.getElementById('cartModal').classList.add('active'); }
+        function closeCart() { document.getElementById('cartModal').classList.remove('active'); }
+
+        function sendWhatsApp() {
+            if (carrito.length === 0) {
+                alert('Tu carrito está vacío');
+                return;
+            }
+
+            let mensaje = "¡Hola Lamorena Beauty Co.! 💖 Quiero hacer el siguiente pedido:\n\n";
+            carrito.forEach(item => {
+                mensaje += `• ${item.cantidad}x ${item.nombre} - $${(item.precio * item.cantidad).toLocaleString('es-CO')}\n`;
+            });
+            const total = carrito.reduce((sum, i) => sum + (i.precio * i.cantidad), 0);
+            mensaje += `\n*TOTAL: $${total.toLocaleString('es-CO')}*\n\n`;
+            mensaje += "Por favor confirmar disponibilidad y método de envío. ¡Gracias! ✨";
+
+            const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, '_blank');
+        }
+
+        renderProductos();
+        actualizarCarrito();
+    </script>
+
+</body>
+</html>
