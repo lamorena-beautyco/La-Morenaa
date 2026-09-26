@@ -4,141 +4,510 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lamorena Beauty Co. | Tienda Oficial</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --amarillo-pastel: #FFF5CC;
-            --amarillo-suave: #FFE9A8;
+            --crema: #FFFDF9;
+            --amarillo-pastel: #FFF8E1;
+            --amarillo-suave: #FFEFC2;
+            --amarillo-medio: #F5DFA0;
             --amarillo-dorado: #E6C878;
-            --rosa-pastel: #FFE4E1;
-            --rosa-suave: #FFD1DC;
+            --amarillo-intenso: #D4AF37;
+            --rosa-pastel: #FFEEF0;
+            --rosa-suave: #FFD9E0;
+            --rosa-medio: #FBC4CF;
             --rosa-fuerte: #F7A8B8;
-            --blanco-crema: #FFFDF9;
-            --blanco: #FFFFFF;
-            --texto-oscuro: #4A403A;
-            --texto-suave: #8A7F78;
-            --sombra-suave: rgba(230, 200, 120, 0.15);
-            --sombra-fuerte: rgba(247, 168, 184, 0.25);
+            --rosa-intenso: #E88BA0;
+            --texto-oscuro: #5A4A42;
+            --texto-medio: #7A6A62;
+            --texto-suave: #9A8A82;
+            --sombra-suave: rgba(230, 200, 120, 0.12);
+            --sombra-media: rgba(230, 200, 120, 0.22);
+            --sombra-fuerte: rgba(247, 168, 184, 0.35);
             --verde-whatsapp: #25D366;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        html { scroll-behavior: smooth; }
+
         body {
-            background: linear-gradient(135deg, #FFFDF9 0%, #FFF5CC 40%, #FFE4E1 100%);
+            background: linear-gradient(160deg, #FFFDF9 0%, #FFF8E1 30%, #FFEEF0 65%, #FFD9E0 100%);
             background-attachment: fixed;
             font-family: 'Montserrat', sans-serif;
             color: var(--texto-oscuro);
             min-height: 100vh;
-            padding: 30px 20px 120px;
+            padding: 0 0 120px;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            animation: fadeIn 1.2s ease-in-out;
-        }
-
-        .header {
+        /* PANTALLA DE BIENVENIDA */
+        .welcome-screen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            background: linear-gradient(160deg, #FFFDF9 0%, #FFF8E1 40%, #FFEEF0 70%, #FFD9E0 100%);
+            z-index: 5000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            margin-bottom: 50px;
-            padding: 50px 30px;
-            background: var(--blanco);
-            border-radius: 30px;
-            box-shadow: 0 20px 50px var(--sombra-suave);
+            padding: 30px 20px;
+            overflow-y: auto;
+            transition: opacity 0.9s ease, visibility 0.9s ease;
+        }
+
+        .welcome-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 3;
+            max-width: 720px;
+            animation: fadeInUp 1.5s ease;
+        }
+
+        .welcome-bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(251, 196, 207, 0.35));
+            box-shadow: 0 15px 40px rgba(247, 168, 184, 0.3);
+            animation: floatBubble 10s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .welcome-bubble:nth-child(1) { width: 140px; height: 140px; top: 8%; left: 4%; animation-delay: 0s; }
+        .welcome-bubble:nth-child(2) { width: 90px; height: 90px; top: 72%; left: 8%; animation-delay: 2s; }
+        .welcome-bubble:nth-child(3) { width: 170px; height: 170px; top: 12%; right: 6%; animation-delay: 4s; }
+        .welcome-bubble:nth-child(4) { width: 100px; height: 100px; bottom: 12%; right: 12%; animation-delay: 1s; }
+        .welcome-bubble:nth-child(5) { width: 70px; height: 70px; top: 45%; left: 6%; animation-delay: 3s; }
+        .welcome-bubble:nth-child(6) { width: 60px; height: 60px; top: 25%; right: 25%; animation-delay: 5s; }
+
+        @keyframes floatBubble {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.7; }
+            50% { transform: translateY(-30px) scale(1.1); opacity: 1; }
+        }
+
+        .welcome-subtitle {
+            font-size: 0.8rem;
+            color: var(--texto-medio);
+            text-transform: uppercase;
+            letter-spacing: 12px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            animation: fadeInUp 1.2s ease 0.2s backwards;
+        }
+
+        .welcome-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            background: linear-gradient(90deg, #5A4A42 0%, #D4AF37 50%, #5A4A42 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            font-style: italic;
+            font-weight: 600;
+            letter-spacing: 3px;
+            line-height: 1.05;
+            animation: shimmer 4s linear infinite, fadeInUp 1.2s ease 0.4s backwards;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .welcome-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            margin: 30px 0;
+            animation: fadeInUp 1.2s ease 0.6s backwards;
+        }
+
+        .welcome-divider-line {
+            height: 1px;
+            width: 80px;
+            background: linear-gradient(90deg, transparent, var(--amarillo-dorado), transparent);
+        }
+
+        .welcome-divider-heart {
+            color: var(--rosa-fuerte);
+            font-size: 1.5rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .welcome-description {
+            font-size: 1.05rem;
+            color: var(--texto-medio);
+            line-height: 2;
+            margin-bottom: 45px;
+            font-weight: 400;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1.2s ease 0.8s backwards;
+        }
+
+        .welcome-btn {
+            background: linear-gradient(135deg, var(--rosa-suave), var(--amarillo-suave));
+            color: var(--texto-oscuro);
+            border: none;
+            padding: 22px 65px;
+            border-radius: 60px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 20px 50px var(--sombra-fuerte);
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(230, 200, 120, 0.3);
+            animation: fadeInUp 1.2s ease 1s backwards;
         }
 
-        .header::before {
+        .welcome-btn::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 233, 168, 0.3) 0%, transparent 60%);
-            animation: rotate 20s linear infinite;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            transition: left 0.7s;
         }
 
-        @keyframes rotate {
+        .welcome-btn:hover::before { left: 100%; }
+
+        .welcome-btn:hover {
+            background: linear-gradient(135deg, var(--amarillo-suave), var(--rosa-suave));
+            transform: translateY(-6px) scale(1.04);
+            box-shadow: 0 30px 65px var(--sombra-fuerte);
+        }
+
+        /* TIENDA */
+        .shop {
+            opacity: 0;
+            transition: opacity 0.9s ease;
+        }
+
+        .shop.visible { opacity: 1; }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            width: 100%;
+            min-height: 450px;
+            margin-bottom: 60px;
+            border-radius: 0 0 60px 60px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFEEF0 50%, #FFD9E0 100%);
+            box-shadow: 0 30px 80px var(--sombra-media);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 60%);
+            animation: rotateGlow 25s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes rotateGlow {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
-        .welcome-text {
+        .hero-bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(251, 196, 207, 0.35));
+            box-shadow: 0 15px 40px rgba(247, 168, 184, 0.3);
+            animation: floatBubble 12s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        .hero-bubble:nth-child(1) { width: 100px; height: 100px; top: 12%; left: 6%; animation-delay: 0s; }
+        .hero-bubble:nth-child(2) { width: 60px; height: 60px; top: 70%; left: 12%; animation-delay: 2s; }
+        .hero-bubble:nth-child(3) { width: 130px; height: 130px; top: 18%; right: 8%; animation-delay: 4s; }
+        .hero-bubble:nth-child(4) { width: 80px; height: 80px; bottom: 15%; right: 15%; animation-delay: 1s; }
+        .hero-bubble:nth-child(5) { width: 50px; height: 50px; top: 45%; left: 45%; animation-delay: 3s; }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            padding: 60px 30px;
+        }
+
+        .hero-subtitle {
+            font-size: 0.85rem;
+            color: var(--texto-medio);
+            text-transform: uppercase;
+            letter-spacing: 12px;
+            font-weight: 400;
+            margin-bottom: 18px;
+        }
+
+        .hero-title {
             font-family: 'Playfair Display', serif;
-            font-size: 3rem;
+            font-size: 3.8rem;
             color: var(--texto-oscuro);
-            margin-bottom: 10px;
+            margin-bottom: 18px;
             font-style: italic;
             font-weight: 600;
-            letter-spacing: 2px;
-            position: relative;
-            z-index: 2;
+            letter-spacing: 3px;
+            line-height: 1.1;
         }
 
-        .sub-welcome {
-            font-size: 0.85rem;
-            color: var(--rosa-fuerte);
+        .hero-tagline {
+            font-size: 0.9rem;
+            color: var(--rosa-intenso);
             text-transform: uppercase;
-            letter-spacing: 8px;
-            font-weight: 400;
+            letter-spacing: 6px;
+            font-weight: 500;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* GALERÍA FLOTANTE */
+        .floating-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 28px;
+            margin-bottom: 70px;
+            padding: 0 20px;
+        }
+
+        .gallery-item {
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 20px 45px var(--sombra-media);
+            transition: all 0.5s ease;
+            animation: floatImage 6s ease-in-out infinite;
+            height: 240px;
+            border: 4px solid var(--crema);
             position: relative;
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 28px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            pointer-events: none;
             z-index: 2;
         }
 
+        .gallery-item:nth-child(1) { animation-delay: 0s; }
+        .gallery-item:nth-child(2) { animation-delay: 1.2s; }
+        .gallery-item:nth-child(3) { animation-delay: 2.4s; }
+        .gallery-item:nth-child(4) { animation-delay: 3.6s; }
+        .gallery-item:nth-child(5) { animation-delay: 4.8s; }
+
+        .gallery-item:hover {
+            transform: scale(1.05) translateY(-12px);
+            box-shadow: 0 30px 65px var(--sombra-fuerte);
+            border-color: var(--amarillo-dorado);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.9s;
+        }
+
+        .gallery-item:hover img { transform: scale(1.15); }
+
+        @keyframes floatImage {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-18px); }
+        }
+
+        /* CATEGORÍAS */
         .categories {
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             flex-wrap: wrap;
+            padding: 0 20px;
         }
 
         .cat-btn {
-            background: var(--blanco);
-            border: 2px solid var(--amarillo-suave);
-            padding: 12px 30px;
+            background: var(--crema);
+            border: 2px solid var(--amarillo-medio);
+            padding: 15px 34px;
             border-radius: 50px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 500;
             font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
             cursor: pointer;
             transition: all 0.4s ease;
             color: var(--texto-oscuro);
-            box-shadow: 0 5px 15px rgba(255, 233, 168, 0.4);
+            box-shadow: 0 10px 25px var(--sombra-suave);
+            position: relative;
+            overflow: hidden;
         }
+
+        .cat-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            transition: left 0.7s;
+        }
+
+        .cat-btn:hover::before { left: 100%; }
 
         .cat-btn:hover, .cat-btn.active {
-            background: linear-gradient(135deg, var(--amarillo-pastel), var(--rosa-pastel));
-            border-color: var(--rosa-fuerte);
-            color: var(--texto-oscuro);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px var(--sombra-fuerte);
+            background: linear-gradient(135deg, var(--amarillo-suave), var(--rosa-suave));
+            border-color: var(--rosa-medio);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px var(--sombra-fuerte);
         }
 
+        /* BANNERS */
+        .category-banner {
+            width: 100%;
+            height: 340px;
+            border-radius: 45px;
+            overflow: hidden;
+            margin-bottom: 55px;
+            position: relative;
+            box-shadow: 0 30px 70px var(--sombra-media);
+            display: none;
+            border: 5px solid var(--crema);
+        }
+
+        .category-banner.active {
+            display: block;
+            animation: fadeInScale 0.9s ease;
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .category-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 30%;
+        }
+
+        .category-banner-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 239, 194, 0.4) 0%, rgba(251, 196, 207, 0.5) 50%, rgba(90, 74, 66, 0.6) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .category-banner-label {
+            font-size: 0.8rem;
+            color: #FFFDF9;
+            text-transform: uppercase;
+            letter-spacing: 10px;
+            font-weight: 400;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+        }
+
+        .category-banner-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: #FFFDF9;
+            font-style: italic;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-shadow: 0 5px 25px rgba(0,0,0,0.5);
+            line-height: 1.1;
+        }
+
+        /* TÍTULO DE SECCIÓN */
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 55px;
+            padding: 0 20px;
+        }
+
+        .section-title-line {
+            height: 1px;
+            width: 90px;
+            background: linear-gradient(90deg, transparent, var(--amarillo-dorado), transparent);
+        }
+
+        .section-title-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--texto-oscuro);
+            font-style: italic;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        /* GRID DE PRODUCTOS */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 50px;
+            margin-bottom: 90px;
+            padding: 0 20px;
         }
 
+        /* TARJETA */
         .product-card {
-            background: var(--blanco);
-            border-radius: 25px;
+            background: var(--crema);
+            border-radius: 35px;
             overflow: hidden;
-            transition: all 0.5s ease;
-            box-shadow: 0 15px 35px rgba(255, 233, 168, 0.3);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 20px 50px var(--sombra-suave);
             display: flex;
             flex-direction: column;
             position: relative;
-            border: 1px solid rgba(255, 209, 220, 0.5);
+            border: 2px solid var(--rosa-pastel);
         }
 
         .product-card::before {
@@ -151,24 +520,25 @@
         }
 
         .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px var(--sombra-fuerte);
+            transform: translateY(-18px);
+            box-shadow: 0 40px 80px var(--sombra-fuerte);
             border-color: var(--amarillo-dorado);
         }
 
         .product-image-container {
             width: 100%;
-            height: 280px;
+            height: 360px;
             overflow: hidden;
             background: linear-gradient(135deg, var(--amarillo-pastel) 0%, var(--rosa-pastel) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            cursor: pointer;
         }
 
         .product-icon-placeholder {
-            font-size: 5rem;
+            font-size: 7rem;
             color: var(--amarillo-dorado);
             opacity: 0.5;
             position: absolute;
@@ -178,130 +548,252 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.8s ease;
+            transition: transform 1s ease;
             position: relative;
             z-index: 2;
         }
 
-        .product-card:hover .product-image {
-            transform: scale(1.08);
-        }
+        .product-card:hover .product-image { transform: scale(1.15); }
 
         .product-info {
-            padding: 25px 20px;
+            padding: 35px 28px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
             text-align: center;
-            background: var(--blanco);
+            background: var(--crema);
         }
 
         .product-name {
             font-family: 'Playfair Display', serif;
-            font-size: 1.15rem;
+            font-size: 1.35rem;
             color: var(--texto-oscuro);
-            margin-bottom: 10px;
+            margin-bottom: 14px;
             font-weight: 600;
             line-height: 1.3;
-            letter-spacing: 0.5px;
         }
 
         .product-desc {
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             color: var(--texto-suave);
-            margin-bottom: 18px;
-            line-height: 1.5;
+            margin-bottom: 22px;
+            line-height: 1.7;
             flex-grow: 1;
-            font-weight: 400;
         }
 
         .product-price {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+            font-size: 1.9rem;
             font-weight: 700;
-            color: var(--rosa-fuerte);
-            margin-bottom: 18px;
+            color: var(--rosa-intenso);
+            margin-bottom: 22px;
         }
 
         .btn-add {
-            background: linear-gradient(135deg, var(--amarillo-pastel), var(--amarillo-suave));
+            background: linear-gradient(135deg, var(--amarillo-suave), var(--rosa-suave));
             color: var(--texto-oscuro);
             border: none;
-            padding: 14px 20px;
+            padding: 17px 20px;
             border-radius: 50px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
             cursor: pointer;
             transition: all 0.4s;
             width: 100%;
-            box-shadow: 0 5px 15px rgba(255, 233, 168, 0.5);
+            box-shadow: 0 10px 25px var(--sombra-suave);
+            position: relative;
+            overflow: hidden;
         }
+
+        .btn-add::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            transition: left 0.7s;
+        }
+
+        .btn-add:hover::before { left: 100%; }
 
         .btn-add:hover {
-            background: linear-gradient(135deg, var(--rosa-pastel), var(--rosa-suave));
-            color: var(--texto-oscuro);
-            transform: scale(1.03);
-            box-shadow: 0 10px 25px var(--sombra-fuerte);
+            background: linear-gradient(135deg, var(--rosa-suave), var(--amarillo-suave));
+            transform: scale(1.04);
+            box-shadow: 0 18px 35px var(--sombra-fuerte);
         }
 
+        /* MODAL DE PRODUCTO */
+        .product-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(90, 74, 66, 0.55);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(12px);
+        }
+
+        .product-modal.active { display: flex; }
+
+        .product-modal-content {
+            background: var(--crema);
+            border-radius: 40px;
+            padding: 45px;
+            width: 100%;
+            max-width: 950px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 50px 100px rgba(90, 74, 66, 0.35);
+            animation: slideUp 0.5s ease;
+            border: 4px solid var(--amarillo-suave);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px;
+            position: relative;
+        }
+
+        .product-modal-close {
+            position: absolute;
+            top: 25px; right: 30px;
+            background: var(--rosa-pastel);
+            border: none;
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--texto-oscuro);
+            transition: all 0.3s;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .product-modal-close:hover {
+            background: var(--rosa-fuerte);
+            color: white;
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        .product-modal-image {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            border-radius: 30px;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--amarillo-pastel), var(--rosa-pastel));
+            border: 3px solid var(--crema);
+            box-shadow: 0 15px 40px var(--sombra-suave);
+        }
+
+        .product-modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-modal-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .product-modal-category {
+            font-size: 0.75rem;
+            color: var(--rosa-intenso);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+
+        .product-modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--texto-oscuro);
+            margin-bottom: 22px;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .product-modal-desc {
+            font-size: 0.95rem;
+            color: var(--texto-suave);
+            line-height: 1.9;
+            margin-bottom: 28px;
+        }
+
+        .product-modal-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--rosa-intenso);
+            margin-bottom: 28px;
+        }
+
+        /* BOTÓN FLOTANTE CARRITO */
         .cart-float {
             position: fixed;
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(135deg, var(--rosa-pastel), var(--rosa-suave));
+            background: linear-gradient(135deg, var(--rosa-suave), var(--amarillo-suave));
             color: var(--texto-oscuro);
-            padding: 16px 40px;
+            padding: 20px 50px;
             border-radius: 50px;
             font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 0.8rem;
+            font-weight: 700;
+            font-size: 0.82rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            box-shadow: 0 15px 40px var(--sombra-fuerte);
+            letter-spacing: 2.5px;
+            box-shadow: 0 25px 60px var(--sombra-fuerte);
             cursor: pointer;
             display: none;
             align-items: center;
             gap: 12px;
             transition: all 0.4s;
             z-index: 1000;
-            border: 2px solid var(--blanco);
+            border: 3px solid var(--crema);
         }
 
         .cart-float:hover {
-            transform: translateX(-50%) scale(1.05);
-            background: linear-gradient(135deg, var(--amarillo-pastel), var(--amarillo-suave));
-            box-shadow: 0 20px 50px var(--sombra-suave);
+            transform: translateX(-50%) scale(1.08);
+            background: linear-gradient(135deg, var(--amarillo-suave), var(--rosa-suave));
+            box-shadow: 0 30px 70px var(--sombra-fuerte);
         }
 
+        /* MODAL CARRITO */
         .cart-modal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(74, 64, 58, 0.4);
+            background: rgba(90, 74, 66, 0.45);
             z-index: 2000;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
         }
 
         .cart-modal.active { display: flex; }
 
         .cart-content {
-            background: var(--blanco-crema);
-            border-radius: 30px;
-            padding: 40px;
+            background: var(--crema);
+            border-radius: 35px;
+            padding: 45px;
             width: 100%;
-            max-width: 520px;
+            max-width: 550px;
             max-height: 85vh;
             overflow-y: auto;
-            box-shadow: 0 30px 60px rgba(74, 64, 58, 0.2);
+            box-shadow: 0 40px 80px rgba(90, 74, 66, 0.3);
             animation: slideUp 0.5s ease;
-            border: 2px solid var(--amarillo-pastel);
+            border: 4px solid var(--amarillo-suave);
         }
 
         @keyframes slideUp {
@@ -311,36 +803,31 @@
 
         .cart-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--texto-oscuro);
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             font-weight: 600;
-            letter-spacing: 1px;
         }
 
         .cart-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 0;
+            padding: 18px 0;
             border-bottom: 1px solid var(--amarillo-pastel);
         }
 
         .cart-item-info { flex: 1; padding-right: 15px; }
-        .cart-item-name { font-weight: 600; font-size: 0.9rem; color: var(--texto-oscuro); }
-        .cart-item-price { font-size: 0.8rem; color: var(--texto-suave); font-weight: 400; }
+        .cart-item-name { font-weight: 600; font-size: 0.92rem; color: var(--texto-oscuro); }
+        .cart-item-price { font-size: 0.82rem; color: var(--texto-suave); }
 
-        .cart-item-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .cart-item-controls { display: flex; align-items: center; gap: 10px; }
 
         .qty-btn {
             background: var(--amarillo-pastel);
             border: none;
-            width: 34px; height: 34px;
+            width: 36px; height: 36px;
             border-radius: 50%;
             cursor: pointer;
             font-weight: 700;
@@ -349,72 +836,63 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1rem;
         }
 
-        .qty-btn:hover { background: var(--rosa-fuerte); color: white; transform: scale(1.1); }
+        .qty-btn:hover { background: var(--rosa-fuerte); color: white; transform: scale(1.15); }
 
-        .cart-item-qty {
-            font-weight: 700;
-            min-width: 25px;
-            text-align: center;
-            font-size: 0.95rem;
-        }
+        .cart-item-qty { font-weight: 700; min-width: 25px; text-align: center; }
 
         .cart-total {
             display: flex;
             justify-content: space-between;
             font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            color: var(--rosa-fuerte);
-            margin: 30px 0;
-            padding-top: 20px;
+            color: var(--rosa-intenso);
+            margin: 35px 0;
+            padding-top: 25px;
             border-top: 2px dashed var(--amarillo-dorado);
         }
 
-        .cart-actions {
-            display: flex;
-            gap: 12px;
-            flex-direction: column;
-        }
+        .cart-actions { display: flex; gap: 14px; flex-direction: column; }
 
         .btn-whatsapp {
-            background: linear-gradient(135deg, var(--rosa-pastel), var(--rosa-suave));
+            background: linear-gradient(135deg, var(--rosa-suave), var(--amarillo-suave));
             color: var(--texto-oscuro);
             border: none;
-            padding: 16px;
+            padding: 18px;
             border-radius: 50px;
             font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 0.8rem;
+            font-weight: 700;
+            font-size: 0.82rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
             cursor: pointer;
             transition: all 0.4s;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
-            box-shadow: 0 10px 25px var(--sombra-fuerte);
+            box-shadow: 0 15px 35px var(--sombra-fuerte);
         }
 
         .btn-whatsapp:hover { 
-            background: linear-gradient(135deg, var(--amarillo-pastel), var(--amarillo-suave));
+            background: linear-gradient(135deg, var(--amarillo-suave), var(--rosa-suave));
             transform: scale(1.02); 
-            box-shadow: 0 15px 35px var(--sombra-suave);
         }
 
         .btn-close {
             background: transparent;
             color: var(--texto-suave);
-            border: 2px solid var(--amarillo-pastel);
-            padding: 14px;
+            border: 2px solid var(--amarillo-medio);
+            padding: 15px;
             border-radius: 50px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 500;
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
             cursor: pointer;
             transition: all 0.3s;
         }
@@ -424,123 +902,236 @@
         .empty-cart {
             text-align: center;
             color: var(--texto-suave);
-            padding: 40px 0;
+            padding: 45px 0;
             font-style: italic;
-            font-weight: 400;
         }
 
+        /* INFO CÓMO COMPRAR */
         .info-section {
-            background: var(--blanco);
-            border-radius: 30px;
-            padding: 50px 30px;
-            margin-top: 60px;
-            box-shadow: 0 15px 35px var(--sombra-suave);
-            border: 1px solid var(--amarillo-pastel);
+            background: var(--crema);
+            border-radius: 45px;
+            padding: 70px 45px;
+            margin-top: 40px;
+            box-shadow: 0 25px 60px var(--sombra-suave);
+            border: 3px solid var(--amarillo-pastel);
         }
 
         .info-section h3 {
             font-family: 'Playfair Display', serif;
             color: var(--texto-oscuro);
-            margin-bottom: 40px;
-            font-size: 1.8rem;
+            margin-bottom: 55px;
+            font-size: 2.3rem;
             text-align: center;
             font-weight: 600;
-            letter-spacing: 1px;
+            font-style: italic;
+            letter-spacing: 2px;
         }
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 35px;
         }
 
         .info-item {
             text-align: center;
-            padding: 20px;
+            padding: 35px 28px;
             background: linear-gradient(135deg, var(--amarillo-pastel) 0%, var(--rosa-pastel) 100%);
-            border-radius: 20px;
+            border-radius: 28px;
             transition: all 0.4s;
+            border: 2px solid var(--crema);
         }
 
         .info-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px var(--sombra-suave);
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px var(--sombra-media);
         }
 
         .info-item h4 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             color: var(--texto-oscuro);
-            margin-bottom: 10px;
+            margin-bottom: 14px;
             font-weight: 700;
-            letter-spacing: 1px;
         }
 
         .info-item p {
-            font-size: 0.8rem;
-            color: var(--texto-oscuro);
-            line-height: 1.6;
-            font-weight: 400;
+            font-size: 0.82rem;
+            color: var(--texto-medio);
+            line-height: 1.7;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .product-modal-content {
+                grid-template-columns: 1fr;
+                padding: 35px;
+            }
+            .product-modal-image { min-height: 300px; }
+            .product-modal-title { font-size: 1.7rem; }
+        }
+
+        @media (max-width: 768px) {
+            .welcome-title { font-size: 3.5rem; }
+            .welcome-description { font-size: 0.95rem; }
+            .hero { min-height: 380px; border-radius: 0 0 45px 45px; }
+            .hero-title { font-size: 2.8rem; }
+            .category-banner { height: 240px; }
+            .category-banner-title { font-size: 2.4rem; }
+            .floating-gallery { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+            .gallery-item { height: 190px; }
+            .products-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
         }
 
         @media (max-width: 600px) {
-            body { padding: 20px 15px 120px; }
-            .welcome-text { font-size: 2rem; }
-            .sub-welcome { letter-spacing: 5px; font-size: 0.7rem; }
-            .header { padding: 35px 20px; }
-            .products-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
-            .product-image-container { height: 180px; }
-            .product-info { padding: 15px 10px; }
+            body { padding: 0 0 120px; }
+            .welcome-title { font-size: 2.8rem; letter-spacing: 2px; }
+            .welcome-subtitle { font-size: 0.7rem; letter-spacing: 7px; }
+            .welcome-description { font-size: 0.9rem; line-height: 1.8; }
+            .welcome-btn { padding: 18px 45px; font-size: 0.78rem; letter-spacing: 2.5px; }
+            .hero { min-height: 330px; border-radius: 0 0 35px 35px; }
+            .hero-title { font-size: 2rem; letter-spacing: 2px; }
+            .hero-tagline { font-size: 0.7rem; letter-spacing: 3px; }
+            .container { padding: 0 15px; }
+            .categories { gap: 10px; margin-bottom: 40px; }
+            .cat-btn { padding: 11px 22px; font-size: 0.65rem; letter-spacing: 1.5px; }
+            .section-title-text { font-size: 1.35rem; }
+            .section-title-line { width: 45px; }
+            .products-grid { grid-template-columns: 1fr 1fr; gap: 22px; padding: 0 10px; }
+            .product-image-container { height: 220px; }
+            .product-info { padding: 18px 14px; }
             .product-name { font-size: 0.9rem; }
+            .product-desc { font-size: 0.72rem; }
             .product-price { font-size: 1.2rem; }
-            .btn-add { font-size: 0.6rem; padding: 12px 10px; letter-spacing: 1px; }
-            .cart-content { padding: 25px 20px; }
-            .cart-float { padding: 14px 25px; font-size: 0.7rem; }
-            .info-section { padding: 30px 20px; }
-            .info-section h3 { font-size: 1.5rem; }
+            .btn-add { font-size: 0.62rem; padding: 13px 10px; letter-spacing: 1.2px; }
+            .cart-content { padding: 28px 22px; }
+            .cart-float { padding: 15px 28px; font-size: 0.72rem; }
+            .info-section { padding: 40px 22px; border-radius: 28px; }
+            .info-section h3 { font-size: 1.6rem; margin-bottom: 35px; }
+            .category-banner { height: 190px; border-radius: 28px; }
+            .category-banner-title { font-size: 2rem; letter-spacing: 2px; }
+            .category-banner-label { letter-spacing: 5px; font-size: 0.65rem; }
+            .floating-gallery { grid-template-columns: 1fr 1fr; gap: 14px; padding: 0 10px; }
+            .gallery-item { height: 160px; border-radius: 22px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="header">
-            <h1 class="welcome-text">Bienvenidos a Lamorena</h1>
-            <p class="sub-welcome">Beauty Co.</p>
+    <!-- PANTALLA DE BIENVENIDA -->
+    <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-bubble"></div>
+        <div class="welcome-bubble"></div>
+        <div class="welcome-bubble"></div>
+        <div class="welcome-bubble"></div>
+        <div class="welcome-bubble"></div>
+        <div class="welcome-bubble"></div>
+        
+        <div class="welcome-content">
+            <p class="welcome-subtitle">Beauty Co.</p>
+            <h1 class="welcome-title">Lamorena</h1>
+            
+            <div class="welcome-divider">
+                <div class="welcome-divider-line"></div>
+                <div class="welcome-divider-heart">♥</div>
+                <div class="welcome-divider-line"></div>
+            </div>
+            
+            <p class="welcome-description">
+                Descubre la magia del <strong>Skincare Coreano</strong> y el <strong>maquillaje profesional</strong> 
+                que transformará tu rutina de belleza. En Lamorena Beauty Co. seleccionamos los mejores 
+                productos de K-Beauty y marcas premium para que luzcas radiante todos los días. ✨
+            </p>
+            
+            <button class="welcome-btn" onclick="enterShop()">Ver Productos</button>
+        </div>
+    </div>
+
+    <!-- TIENDA -->
+    <div class="shop" id="shop">
+        
+        <div class="hero">
+            <div class="hero-bubble"></div>
+            <div class="hero-bubble"></div>
+            <div class="hero-bubble"></div>
+            <div class="hero-bubble"></div>
+            <div class="hero-bubble"></div>
+            <div class="hero-content">
+                <p class="hero-subtitle">Beauty Co.</p>
+                <h1 class="hero-title">Bienvenidos a Lamorena</h1>
+                <p class="hero-tagline">Skincare · Maquillaje · Labios</p>
+            </div>
         </div>
 
-        <div class="categories">
-            <button class="cat-btn active" onclick="filterCategory('all', this)">Todos</button>
-            <button class="cat-btn" onclick="filterCategory('skincare', this)">Skincare</button>
-            <button class="cat-btn" onclick="filterCategory('maquillaje', this)">Maquillaje</button>
-            <button class="cat-btn" onclick="filterCategory('labios', this)">Labios</button>
+        <div class="floating-gallery">
+            <div class="gallery-item">
+                <img src="https://i.pinimg.com/736x/c7/53/de/c753dee52185227dfa047c3ad847d28f.jpg" alt="K-Beauty" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="https://i.pinimg.com/1200x/a1/db/17/a1db17f013e38b2cf52c6dc53fbf150e.jpg" alt="Skincare" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="https://i.pinimg.com/1200x/98/70/53/98705326bda6f8c44ccfb063eb481670.jpg" alt="Maquillaje" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="https://i.pinimg.com/1200x/82/00/57/8200579d1ae50fcd7fbb08e01327dd8a.jpg" alt="Beauty" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="https://i.pinimg.com/736x/28/80/53/2880538c5899906500bb72ac824a0d1b.jpg" alt="Glow" loading="lazy">
+            </div>
         </div>
 
-        <div class="products-grid" id="productsGrid"></div>
+        <div class="container">
+            <div class="categories">
+                <button class="cat-btn active" onclick="filterCategory('all', this)">Todos</button>
+                <button class="cat-btn" onclick="filterCategory('skincare', this)">Skincare Coreano</button>
+                <button class="cat-btn" onclick="filterCategory('maquillaje', this)">Maquillaje</button>
+                <button class="cat-btn" onclick="filterCategory('labios', this)">Labios</button>
+            </div>
 
-        <div class="info-section">
-            <h3>¿Cómo comprar?</h3>
-            <div class="info-grid">
-                <div class="info-item">
-                    <h4>01. Elige</h4>
-                    <p>Agrega al carrito los productos que desees.</p>
+            <div class="category-banner" id="skincareBanner">
+                <img src="https://media.istockphoto.com/id/1832208611/es/foto/diversidad-de-rostros-grupos-de-belleza-y-mujeres-felices-con-cosm%C3%A9ticos-naturales-brillo-para.jpg?s=2048x2048&w=is&k=20&c=EBHV5lSRvRZbCGwxbk8bBzF4gGGi3ahbF6qtBbBjMMM=" alt="Skincare Coreano K-Beauty">
+                <div class="category-banner-overlay">
+                    <p class="category-banner-label">K-Beauty</p>
+                    <h2 class="category-banner-title">Skincare Coreano</h2>
                 </div>
-                <div class="info-item">
-                    <h4>02. Envía</h4>
-                    <p>Haz clic en "Finalizar Pedido" y se abrirá WhatsApp con tu lista.</p>
+            </div>
+
+            <div class="category-banner" id="maquillajeBanner">
+                <img src="https://i.pinimg.com/736x/22/2f/e0/222fe01fd086edc4719622d93e0cf0da.jpg" alt="Maquillaje Profesional">
+                <div class="category-banner-overlay">
+                    <p class="category-banner-label">Beauty</p>
+                    <h2 class="category-banner-title">Maquillaje Profesional</h2>
                 </div>
-                <div class="info-item">
-                    <h4>03. Confirma</h4>
-                    <p>Indica si requieres envío a domicilio o recoges en sucursal.</p>
-                </div>
-                <div class="info-item">
-                    <h4>04. Paga</h4>
-                    <p>Transferencia o efectivo. Envía tu comprobante para confirmar.</p>
+            </div>
+
+            <div class="section-title" id="sectionTitle">
+                <div class="section-title-line"></div>
+                <h2 class="section-title-text" id="sectionTitleText">Todos los Productos</h2>
+                <div class="section-title-line"></div>
+            </div>
+
+            <div class="products-grid" id="productsGrid"></div>
+
+            <div class="info-section">
+                <h3>¿Cómo comprar?</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h4>01. Elige</h4>
+                        <p>Agrega al carrito los productos que desees.</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>02. Envía</h4>
+                        <p>Haz clic en "Finalizar Pedido" y se abrirá WhatsApp con tu lista.</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>03. Confirma</h4>
+                        <p>Indica si requieres envío a domicilio o recoges en sucursal.</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>04. Paga</h4>
+                        <p>Transferencia o efectivo. Envía tu comprobante para confirmar.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -570,12 +1161,32 @@
         </div>
     </div>
 
+    <div class="product-modal" id="productModal" onclick="closeProductModal(event)">
+        <div class="product-modal-content" onclick="event.stopPropagation()">
+            <button class="product-modal-close" onclick="closeProductModal()">×</button>
+            <div class="product-modal-image">
+                <img id="modalImage" src="" alt="">
+            </div>
+            <div class="product-modal-info">
+                <p class="product-modal-category" id="modalCategory">Categoría</p>
+                <h2 class="product-modal-title" id="modalTitle">Nombre del Producto</h2>
+                <p class="product-modal-desc" id="modalDesc">Descripción del producto</p>
+                <p class="product-modal-price" id="modalPrice">$0</p>
+                <button class="btn-add" onclick="addFromModal()">Agregar al Carrito</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // ============================================================
-        // ✅ PRODUCTOS CON TODAS LAS IMÁGENES ✅
-        // ============================================================
-        
+        function enterShop() {
+            document.getElementById('welcomeScreen').classList.add('hidden');
+            document.getElementById('shop').classList.add('visible');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ✅ PRODUCTOS ACTUALIZADOS (Super Corrector y Fijador eliminados)
         const productos = [
+            // ============ SKINCARE ============
             {
                 id: 1,
                 nombre: "Bloqueador Solar Mixsoon Bean Sun Serum SPF 50+",
@@ -594,14 +1205,6 @@
             },
             {
                 id: 3,
-                nombre: "Fijador de Maquillaje Cica-Tree Shaking Glow Sun Fixer SPF 50+",
-                descripcion: "Fija tu maquillaje mientras refresca, hidrata y protege. Árbol de Té + Centella Asiática.",
-                precio: 60000,
-                categoria: "skincare",
-                imagen: ""
-            },
-            {
-                id: 4,
                 nombre: "Skin1004 Madagascar Centella Ampoule Kit",
                 descripcion: "4 ampollas: calmante, anti-acné, iluminadora y para poros. (Dos serums disponibles).",
                 precio: 40000,
@@ -609,7 +1212,7 @@
                 imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG825GTKxaZbM6lj6x7l1yzHBJFyzDR52HktJvd-3tRQ&s=10"
             },
             {
-                id: 5,
+                id: 4,
                 nombre: "Madagascar Centella Hyalu-Cica Silky-Fit Sun Stick",
                 descripcion: "Barra solar SPF50+ PA++++. Acabado sedoso, sin residuo blanco. (Precio preventa).",
                 precio: 55000,
@@ -617,7 +1220,7 @@
                 imagen: "https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/sio/sio83021/y/18.jpg"
             },
             {
-                id: 6,
+                id: 5,
                 nombre: "Centella Poremizing Quick Clay Stick Mask",
                 descripcion: "Mascarilla de arcilla en barra. Limpia poros, absorbe grasa. Centella + Caolín.",
                 precio: 70000,
@@ -625,15 +1228,16 @@
                 imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp865JOADLyuWVIVHz1xK61tquaa0j9-L7RuxHiCed6SQZM6eMtFTz2q8&s=10"
             },
             {
-                id: 7,
+                id: 6,
                 nombre: "COSRX Low pH Good Morning Gel Cleanser (150ml)",
                 descripcion: "Gel limpiador de bajo pH. Ácido betulínico + Té verde. Ideal pieles mixtas/acnéicas.",
                 precio: 65000,
                 categoria: "skincare",
                 imagen: "https://my-kare.com/cdn/shop/files/COSRX-Low-pH-Good-Morning-Gel-Cleanser-2_1200x.jpg?v=1740241317"
             },
+            // ============ MAQUILLAJE ============
             {
-                id: 8,
+                id: 7,
                 nombre: "Rubor Líquido Trendy Star",
                 descripcion: "Fórmula ligera, acabado natural mate. Tonos: 03, 04, 05.",
                 precio: 16000,
@@ -641,7 +1245,7 @@
                 imagen: "https://b2ctrendy.vtexassets.com/assets/vtex.file-manager-graphql/images/1506d358-d898-490c-8aee-fc206ddb14de___0d1ad08aa79b269b91ada9b7ac4ef1c7.jpg"
             },
             {
-                id: 9,
+                id: 8,
                 nombre: "Rubor en Crema Trendy by Camila Orrego (Rubor Vergüenza)",
                 descripcion: "Acabado natural y luminoso. Manteca de karité + Vitamina E.",
                 precio: 20000,
@@ -649,7 +1253,7 @@
                 imagen: "https://http2.mlstatic.com/D_NQ_NP_961801-MLA106669725290_022026-O.webp"
             },
             {
-                id: 10,
+                id: 9,
                 nombre: "Kit de Cejas Trendy by Camila Orrego",
                 descripcion: "Paleta 2 en 1 con pomada y sombras. Incluye aplicador. Tonos claros y oscuros.",
                 precio: 15000,
@@ -657,15 +1261,7 @@
                 imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjLyp5ZXq0bJPwbd5TFB-ceRAYQRptKubUvNqkaSQHnw&s=10"
             },
             {
-                id: 11,
-                nombre: "Trendy Super Corrector",
-                descripcion: "Alta cobertura, acabado semi-mate. Agentes hidratantes.",
-                precio: 20000,
-                categoria: "maquillaje",
-                imagen: "https://http2.mlstatic.com/D_NQ_NP_961801-MLA106669725290_022026-O.webp"
-            },
-            {
-                id: 12,
+                id: 10,
                 nombre: "Corrector de Soleva",
                 descripcion: "Cobertura media a total, acabado natural. Hidratante + Vitamina E. Tono 0.5n.",
                 precio: 27000,
@@ -673,15 +1269,15 @@
                 imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtHcuQ2lIWUNrVnYdkamC6ny0vuuG0PcaqHP8T8CU5zg&s=10"
             },
             {
-                id: 13,
+                id: 11,
                 nombre: "Bloomshell My Concealer (20ml)",
-                descripcion: "Cobertura media, acabado natural. Vitamina E + Ácido Hialurónico. Tonos 05-5.5-08.",
+                descripcion: "Cobertura media, acabado natural. Vitamina E + Ácido Hialurónico. Tonos 05-08.",
                 precio: 24000,
                 categoria: "maquillaje",
                 imagen: "https://mysticstore.com.co/wp-content/uploads/2025/07/My-concealer-big-20-ml-NATURAL-BloomShell.png"
             },
             {
-                id: 14,
+                id: 12,
                 nombre: "Contorno Bloom Cream Sculpt Bloomshell",
                 descripcion: "Paleta 2 en 1 en crema y polvo. Pigmentos modulables. Tonos: Deep, Toasted.",
                 precio: 30000,
@@ -689,7 +1285,7 @@
                 imagen: "https://bonitaexpress.co/wp-content/uploads/2024/10/Bloom-Cream-contorno-en-duo-bloomshell-toasted.jpg"
             },
             {
-                id: 15,
+                id: 13,
                 nombre: "Paleta Bloom Tropical Luminous – Bronzer y Contorno",
                 descripcion: "Dos tonos de contorno en polvo. Acabado mate natural. Tono 02.",
                 precio: 30000,
@@ -697,15 +1293,16 @@
                 imagen: "https://bloomshell.co/wp-content/uploads/2026/08/Pagina-web-2-8.png"
             },
             {
-                id: 16,
+                id: 14,
                 nombre: "Contorno Queen Trendy by Camila Orrego",
                 descripcion: "Contorno líquido en crema. Fórmula cremosa para esculpir.",
                 precio: 20000,
                 categoria: "maquillaje",
                 imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpAr2J45L3x9j7jyeTqt3TiSoy23C66FqCMvoWlfSBXA&s=10"
             },
+            // ============ LABIOS ============
             {
-                id: 17,
+                id: 15,
                 nombre: "Lip Oil Sandía – Trendy by Camila Orrego",
                 descripcion: "Aceite labial glossy, aroma sandía. Vitamina E + Aceites emolientes. Tonos 04, 06.",
                 precio: 15000,
@@ -713,7 +1310,7 @@
                 imagen: "https://tucatalogodemaquillaje.com/wp-content/uploads/2025/11/lip-oil-sandia-trendy.jpg"
             },
             {
-                id: 18,
+                id: 16,
                 nombre: "Brillo de Labios HoloGlam - Trendy",
                 descripcion: "Gloss con destellos holográficos. 4 tonos. Partículas holográficas + Aceites.",
                 precio: 15000,
@@ -721,7 +1318,7 @@
                 imagen: "https://http2.mlstatic.com/D_NQ_NP_611854-MCO109218117590_042026-O.webp"
             },
             {
-                id: 19,
+                id: 17,
                 nombre: "Brillo Cherry Shine Trendy by Camila Orrego",
                 descripcion: "Gloss brillante, aroma cereza. Varios tonos. Agentes humectantes + Aceites.",
                 precio: 12000,
@@ -730,36 +1327,58 @@
             }
         ];
 
-        // ============================================================
-        // ✅ NÚMERO DE WHATSAPP CONFIGURADO ✅
-        // ============================================================
-        // Tu número: 333 226 7596
-        // Con código de país (Colombia +57): 573332267596
         const numeroWhatsApp = "573332267596"; 
 
         let carrito = [];
         let categoriaActual = 'all';
+        let productoModalActual = null;
+
+        const titulosCategoria = {
+            'all': 'Todos los Productos',
+            'skincare': 'Skincare Coreano · K-Beauty',
+            'maquillaje': 'Maquillaje Profesional',
+            'labios': 'Labios & Gloss'
+        };
 
         function renderProductos() {
             const grid = document.getElementById('productsGrid');
+            const bannerSkincare = document.getElementById('skincareBanner');
+            const bannerMaquillaje = document.getElementById('maquillajeBanner');
+            const tituloText = document.getElementById('sectionTitleText');
+            
+            if (categoriaActual === 'skincare') {
+                bannerSkincare.classList.add('active');
+                bannerMaquillaje.classList.remove('active');
+            } else if (categoriaActual === 'maquillaje') {
+                bannerMaquillaje.classList.add('active');
+                bannerSkincare.classList.remove('active');
+            } else {
+                bannerSkincare.classList.remove('active');
+                bannerMaquillaje.classList.remove('active');
+            }
+
+            tituloText.textContent = titulosCategoria[categoriaActual] || 'Productos';
+
             const filtrados = categoriaActual === 'all' 
                 ? productos 
                 : productos.filter(p => p.categoria === categoriaActual);
 
             if (filtrados.length === 0) {
-                grid.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color:#8A7F78; padding:60px; font-weight:400;">No hay productos en esta categoría.</p>';
+                grid.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color:#9A8A82; padding:60px; font-weight:400;">No hay productos en esta categoría.</p>';
                 return;
             }
 
-            grid.innerHTML = filtrados.map(p => {
+            grid.innerHTML = filtrados.map((p, index) => {
                 let contenidoImagen = '';
                 if (p.imagen && p.imagen.trim() !== "") {
                     contenidoImagen = `<img src="${p.imagen}" alt="${p.nombre}" class="product-image" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">`;
                 }
                 
+                const clickable = `onclick="openProductModal(${p.id})"`;
+                
                 return `
-                <div class="product-card">
-                    <div class="product-image-container">
+                <div class="product-card" style="animation-delay: ${index * 0.08}s;">
+                    <div class="product-image-container" ${clickable}>
                         <div class="product-icon-placeholder" style="${p.imagen ? 'display:none;' : 'display:block;'}">🧴</div>
                         ${contenidoImagen}
                     </div>
@@ -767,7 +1386,7 @@
                         <h3 class="product-name">${p.nombre}</h3>
                         <p class="product-desc">${p.descripcion}</p>
                         <div class="product-price">$${p.precio.toLocaleString('es-CO')}</div>
-                        <button class="btn-add" onclick="agregarAlCarrito(${p.id})">Agregar al Carrito</button>
+                        <button class="btn-add" onclick="event.stopPropagation(); agregarAlCarrito(${p.id})">Agregar al Carrito</button>
                     </div>
                 </div>
                 `;
@@ -779,6 +1398,7 @@
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             renderProductos();
+            document.getElementById('sectionTitle').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function agregarAlCarrito(id) {
@@ -795,7 +1415,7 @@
             const btn = event.target;
             const textoOriginal = btn.textContent;
             btn.textContent = '¡Agregado! ✓';
-            btn.style.background = '#25D366';
+            btn.style.background = 'linear-gradient(135deg, #25D366, #1EA952)';
             btn.style.color = '#fff';
             setTimeout(() => {
                 btn.textContent = textoOriginal;
@@ -851,6 +1471,40 @@
 
         function openCart() { document.getElementById('cartModal').classList.add('active'); }
         function closeCart() { document.getElementById('cartModal').classList.remove('active'); }
+
+        function openProductModal(id) {
+            const p = productos.find(prod => prod.id === id);
+            if (!p) return;
+            productoModalActual = p;
+            
+            document.getElementById('modalImage').src = p.imagen || '';
+            document.getElementById('modalImage').alt = p.nombre;
+            
+            let catNombre = 'Producto';
+            if (p.categoria === 'skincare') catNombre = 'Skincare Coreano';
+            else if (p.categoria === 'maquillaje') catNombre = 'Maquillaje';
+            else if (p.categoria === 'labios') catNombre = 'Labios & Gloss';
+            
+            document.getElementById('modalCategory').textContent = catNombre;
+            document.getElementById('modalTitle').textContent = p.nombre;
+            document.getElementById('modalDesc').textContent = p.descripcion;
+            document.getElementById('modalPrice').textContent = '$' + p.precio.toLocaleString('es-CO');
+            
+            document.getElementById('productModal').classList.add('active');
+        }
+
+        function closeProductModal(event) {
+            if (event && event.target !== event.currentTarget) return;
+            document.getElementById('productModal').classList.remove('active');
+            productoModalActual = null;
+        }
+
+        function addFromModal() {
+            if (productoModalActual) {
+                agregarAlCarrito(productoModalActual.id);
+                closeProductModal();
+            }
+        }
 
         function sendWhatsApp() {
             if (carrito.length === 0) {
