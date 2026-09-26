@@ -497,10 +497,10 @@
             padding: 0 20px;
         }
 
-        /* TARJETA */
+        /* TARJETA - menos redondeada */
         .product-card {
             background: var(--crema);
-            border-radius: 35px;
+            border-radius: 12px; /* Antes era 35px */
             overflow: hidden;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 20px 50px var(--sombra-suave);
@@ -594,7 +594,7 @@
             color: var(--texto-oscuro);
             border: none;
             padding: 17px 20px;
-            border-radius: 50px;
+            border-radius: 8px; /* Antes era 50px */
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
             font-size: 0.78rem;
@@ -625,7 +625,7 @@
             box-shadow: 0 18px 35px var(--sombra-fuerte);
         }
 
-        /* MODAL DE PRODUCTO */
+        /* MODAL DE PRODUCTO CON CARRUSEL */
         .product-modal {
             display: none;
             position: fixed;
@@ -642,7 +642,7 @@
 
         .product-modal-content {
             background: var(--crema);
-            border-radius: 40px;
+            border-radius: 20px; /* Antes era 40px */
             padding: 45px;
             width: 100%;
             max-width: 950px;
@@ -681,21 +681,122 @@
             transform: rotate(90deg) scale(1.1);
         }
 
-        .product-modal-image {
+        /* CARRUSEL */
+        .carousel-container {
+            position: relative;
             width: 100%;
             height: 100%;
             min-height: 400px;
-            border-radius: 30px;
+            border-radius: 12px; /* Antes era 30px */
             overflow: hidden;
             background: linear-gradient(135deg, var(--amarillo-pastel), var(--rosa-pastel));
             border: 3px solid var(--crema);
             box-shadow: 0 15px 40px var(--sombra-suave);
         }
 
-        .product-modal-image img {
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 253, 249, 0.9);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: var(--texto-oscuro);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            z-index: 5;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .carousel-btn:hover {
+            background: var(--amarillo-suave);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-btn.prev { left: 15px; }
+        .carousel-btn.next { right: 15px; }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 5;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 90%;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 253, 249, 0.6);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(90, 74, 66, 0.3);
+        }
+
+        .carousel-dot.active {
+            background: var(--rosa-fuerte);
+            transform: scale(1.3);
+        }
+
+        /* BOTÓN VIDEO TIKTOK */
+        .tiktok-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #000000, #25F4EE, #FE2C55);
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.4s;
+            text-decoration: none;
+            margin-top: 15px;
+            width: 100%;
+            box-shadow: 0 10px 25px rgba(254, 44, 85, 0.3);
+        }
+
+        .tiktok-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 35px rgba(254, 44, 85, 0.5);
         }
 
         .product-modal-info {
@@ -785,7 +886,7 @@
 
         .cart-content {
             background: var(--crema);
-            border-radius: 35px;
+            border-radius: 20px; /* Antes era 35px */
             padding: 45px;
             width: 100%;
             max-width: 550px;
@@ -862,7 +963,7 @@
             color: var(--texto-oscuro);
             border: none;
             padding: 18px;
-            border-radius: 50px;
+            border-radius: 8px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             font-size: 0.82rem;
@@ -887,7 +988,7 @@
             color: var(--texto-suave);
             border: 2px solid var(--amarillo-medio);
             padding: 15px;
-            border-radius: 50px;
+            border-radius: 8px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 500;
             font-size: 0.78rem;
@@ -909,7 +1010,7 @@
         /* INFO CÓMO COMPRAR */
         .info-section {
             background: var(--crema);
-            border-radius: 45px;
+            border-radius: 20px; /* Antes era 45px */
             padding: 70px 45px;
             margin-top: 40px;
             box-shadow: 0 25px 60px var(--sombra-suave);
@@ -937,7 +1038,7 @@
             text-align: center;
             padding: 35px 28px;
             background: linear-gradient(135deg, var(--amarillo-pastel) 0%, var(--rosa-pastel) 100%);
-            border-radius: 28px;
+            border-radius: 12px;
             transition: all 0.4s;
             border: 2px solid var(--crema);
         }
@@ -967,7 +1068,7 @@
                 grid-template-columns: 1fr;
                 padding: 35px;
             }
-            .product-modal-image { min-height: 300px; }
+            .carousel-container { min-height: 300px; }
             .product-modal-title { font-size: 1.7rem; }
         }
 
@@ -1006,13 +1107,16 @@
             .btn-add { font-size: 0.62rem; padding: 13px 10px; letter-spacing: 1.2px; }
             .cart-content { padding: 28px 22px; }
             .cart-float { padding: 15px 28px; font-size: 0.72rem; }
-            .info-section { padding: 40px 22px; border-radius: 28px; }
+            .info-section { padding: 40px 22px; border-radius: 12px; }
             .info-section h3 { font-size: 1.6rem; margin-bottom: 35px; }
-            .category-banner { height: 190px; border-radius: 28px; }
+            .category-banner { height: 190px; border-radius: 12px; }
             .category-banner-title { font-size: 2rem; letter-spacing: 2px; }
             .category-banner-label { letter-spacing: 5px; font-size: 0.65rem; }
             .floating-gallery { grid-template-columns: 1fr 1fr; gap: 14px; padding: 0 10px; }
             .gallery-item { height: 160px; border-radius: 22px; }
+            .carousel-btn { width: 38px; height: 38px; font-size: 1rem; }
+            .carousel-btn.prev { left: 10px; }
+            .carousel-btn.next { right: 10px; }
         }
     </style>
 </head>
@@ -1161,18 +1265,30 @@
         </div>
     </div>
 
+    <!-- MODAL DE PRODUCTO CON CARRUSEL -->
     <div class="product-modal" id="productModal" onclick="closeProductModal(event)">
         <div class="product-modal-content" onclick="event.stopPropagation()">
             <button class="product-modal-close" onclick="closeProductModal()">×</button>
-            <div class="product-modal-image">
-                <img id="modalImage" src="" alt="">
+            
+            <div class="carousel-container" id="carouselContainer">
+                <div class="carousel-track" id="carouselTrack"></div>
+                <button class="carousel-btn prev" onclick="prevSlide(event)">‹</button>
+                <button class="carousel-btn next" onclick="nextSlide(event)">›</button>
+                <div class="carousel-dots" id="carouselDots"></div>
             </div>
+            
             <div class="product-modal-info">
                 <p class="product-modal-category" id="modalCategory">Categoría</p>
                 <h2 class="product-modal-title" id="modalTitle">Nombre del Producto</h2>
                 <p class="product-modal-desc" id="modalDesc">Descripción del producto</p>
                 <p class="product-modal-price" id="modalPrice">$0</p>
                 <button class="btn-add" onclick="addFromModal()">Agregar al Carrito</button>
+                <a class="tiktok-btn" id="tiktokBtn" href="#" target="_blank" style="display:none;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                    </svg>
+                    Ver video en TikTok
+                </a>
             </div>
         </div>
     </div>
@@ -1184,7 +1300,9 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // ✅ PRODUCTOS ACTUALIZADOS (Super Corrector y Fijador eliminados)
+        // ============================================================
+        // ✅ PRODUCTOS CON CARRUSEL DE IMÁGENES
+        // ============================================================
         const productos = [
             // ============ SKINCARE ============
             {
@@ -1193,7 +1311,10 @@
                 descripcion: "Protección SPF 50+ PA++++. Hidrata y calma con textura ligera. Centella Asiática + Ácido Hialurónico.",
                 precio: 70000,
                 categoria: "skincare",
-                imagen: "https://www.flawlesstore.com.co/cdn/shop/files/250121mixsoon42165_1.webp?v=1778707358&width=3840"
+                imagenes: [
+                    "https://www.flawlesstore.com.co/cdn/shop/files/250121mixsoon42165_1.webp?v=1778707358&width=3840",
+                    "https://www.flodiaperu.com/cdn/shop/files/IMG-0933.jpg?v=1762540567&width=500"
+                ]
             },
             {
                 id: 2,
@@ -1201,7 +1322,12 @@
                 descripcion: "Protección SPF 50. Textura ligera, acabado luminoso sin rastro blanco. Centella + Ácido Hialurónico.",
                 precio: 80000,
                 categoria: "skincare",
-                imagen: "https://www.flawlesstore.com.co/cdn/shop/files/skin1004-madagascar-centella-tone-brightening-tone-up-sunscreen-37793801601270_1440x_80c64c55-143f-4b74-a7.webp?v=1778688891"
+                imagenes: [
+                    "https://www.flawlesstore.com.co/cdn/shop/files/skin1004-madagascar-centella-tone-brightening-tone-up-sunscreen-37793801601270_1440x_80c64c55-143f-4b74-a7.webp?v=1778688891",
+                    "https://chokchokskin.co/cdn/shop/files/61wO9LUfoML._SL1000_c5738525-0821-488f-886f-39fc8dc10a21.jpg?v=1749478189",
+                    "https://www.selfcareskin.com.co/cdn/shop/files/342.png?v=1735968847&width=1445"
+                ],
+                tiktok: "https://vt.tiktok.com/ZSbYwnWt5/"
             },
             {
                 id: 3,
@@ -1209,7 +1335,14 @@
                 descripcion: "4 ampollas: calmante, anti-acné, iluminadora y para poros. (Dos serums disponibles).",
                 precio: 40000,
                 categoria: "skincare",
-                imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG825GTKxaZbM6lj6x7l1yzHBJFyzDR52HktJvd-3tRQ&s=10"
+                imagenes: [
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG825GTKxaZbM6lj6x7l1yzHBJFyzDR52HktJvd-3tRQ&s=10",
+                    "https://harumiglobal.com/cdn/shop/files/221121_Ampoule_55.jpg?v=1720206116&width=3840",
+                    "https://cdn11.bigcommerce.com/s-63354/images/stencil/1280x1280/products/9977/26541/Skin1004_Madagascar_Centella_Ampoule_Kit_4_x_30ml_image_2__57867.1756820235.jpg?c=2&imbypass=on",
+                    "https://pielboliviana.com/wp-content/uploads/2025/01/14-600x600.png.webp",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxaZbCvq2G2eekpqd0XHQgxrF9acsHsxEC0slZTte8yHHQm98HZ7yLAGu_&s=10",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiSmbVDW5iNp3uXrdOBZTg7L4gngc_25V0TB8_YBBFXQ&s=10"
+                ]
             },
             {
                 id: 4,
@@ -1217,7 +1350,12 @@
                 descripcion: "Barra solar SPF50+ PA++++. Acabado sedoso, sin residuo blanco. (Precio preventa).",
                 precio: 55000,
                 categoria: "skincare",
-                imagen: "https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/sio/sio83021/y/18.jpg"
+                // ✅ 3 IMÁGENES EN CARRUSEL
+                imagenes: [
+                    "https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/sio/sio83021/y/18.jpg",
+                    "https://m.media-amazon.com/images/I/41lt1vFKP4L._AC_UF1000,1000_QL80_.jpg",
+                    "https://www.skin1004.com/cdn/shop/files/skin1004-sun-hyalu-cica-silky-fit-sun-stick-1244408711.png?v=1781512992"
+                ]
             },
             {
                 id: 5,
@@ -1225,7 +1363,7 @@
                 descripcion: "Mascarilla de arcilla en barra. Limpia poros, absorbe grasa. Centella + Caolín.",
                 precio: 70000,
                 categoria: "skincare",
-                imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp865JOADLyuWVIVHz1xK61tquaa0j9-L7RuxHiCed6SQZM6eMtFTz2q8&s=10"
+                imagenes: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp865JOADLyuWVIVHz1xK61tquaa0j9-L7RuxHiCed6SQZM6eMtFTz2q8&s=10"]
             },
             {
                 id: 6,
@@ -1233,7 +1371,7 @@
                 descripcion: "Gel limpiador de bajo pH. Ácido betulínico + Té verde. Ideal pieles mixtas/acnéicas.",
                 precio: 65000,
                 categoria: "skincare",
-                imagen: "https://my-kare.com/cdn/shop/files/COSRX-Low-pH-Good-Morning-Gel-Cleanser-2_1200x.jpg?v=1740241317"
+                imagenes: ["https://my-kare.com/cdn/shop/files/COSRX-Low-pH-Good-Morning-Gel-Cleanser-2_1200x.jpg?v=1740241317"]
             },
             // ============ MAQUILLAJE ============
             {
@@ -1242,7 +1380,10 @@
                 descripcion: "Fórmula ligera, acabado natural mate. Tonos: 03, 04, 05.",
                 precio: 16000,
                 categoria: "maquillaje",
-                imagen: "https://b2ctrendy.vtexassets.com/assets/vtex.file-manager-graphql/images/1506d358-d898-490c-8aee-fc206ddb14de___0d1ad08aa79b269b91ada9b7ac4ef1c7.jpg"
+                imagenes: [
+                    "https://b2ctrendy.vtexassets.com/assets/vtex.file-manager-graphql/images/1506d358-d898-490c-8aee-fc206ddb14de___0d1ad08aa79b269b91ada9b7ac4ef1c7.jpg",
+                    "https://b2ctrendy.vtexassets.com/arquivos/ids/159959/RCS2205-RCS2205--01-3.jpg.jpg?v=638774079656930000"
+                ]
             },
             {
                 id: 8,
@@ -1250,7 +1391,7 @@
                 descripcion: "Acabado natural y luminoso. Manteca de karité + Vitamina E.",
                 precio: 20000,
                 categoria: "maquillaje",
-                imagen: "https://http2.mlstatic.com/D_NQ_NP_961801-MLA106669725290_022026-O.webp"
+                imagenes: ["https://http2.mlstatic.com/D_NQ_NP_961801-MLA106669725290_022026-O.webp"]
             },
             {
                 id: 9,
@@ -1258,7 +1399,7 @@
                 descripcion: "Paleta 2 en 1 con pomada y sombras. Incluye aplicador. Tonos claros y oscuros.",
                 precio: 15000,
                 categoria: "maquillaje",
-                imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjLyp5ZXq0bJPwbd5TFB-ceRAYQRptKubUvNqkaSQHnw&s=10"
+                imagenes: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjLyp5ZXq0bJPwbd5TFB-ceRAYQRptKubUvNqkaSQHnw&s=10"]
             },
             {
                 id: 10,
@@ -1266,7 +1407,7 @@
                 descripcion: "Cobertura media a total, acabado natural. Hidratante + Vitamina E. Tono 0.5n.",
                 precio: 27000,
                 categoria: "maquillaje",
-                imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtHcuQ2lIWUNrVnYdkamC6ny0vuuG0PcaqHP8T8CU5zg&s=10"
+                imagenes: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtHcuQ2lIWUNrVnYdkamC6ny0vuuG0PcaqHP8T8CU5zg&s=10"]
             },
             {
                 id: 11,
@@ -1274,7 +1415,7 @@
                 descripcion: "Cobertura media, acabado natural. Vitamina E + Ácido Hialurónico. Tonos 05-08.",
                 precio: 24000,
                 categoria: "maquillaje",
-                imagen: "https://mysticstore.com.co/wp-content/uploads/2025/07/My-concealer-big-20-ml-NATURAL-BloomShell.png"
+                imagenes: ["https://mysticstore.com.co/wp-content/uploads/2025/07/My-concealer-big-20-ml-NATURAL-BloomShell.png"]
             },
             {
                 id: 12,
@@ -1282,7 +1423,7 @@
                 descripcion: "Paleta 2 en 1 en crema y polvo. Pigmentos modulables. Tonos: Deep, Toasted.",
                 precio: 30000,
                 categoria: "maquillaje",
-                imagen: "https://bonitaexpress.co/wp-content/uploads/2024/10/Bloom-Cream-contorno-en-duo-bloomshell-toasted.jpg"
+                imagenes: ["https://bonitaexpress.co/wp-content/uploads/2024/10/Bloom-Cream-contorno-en-duo-bloomshell-toasted.jpg"]
             },
             {
                 id: 13,
@@ -1290,7 +1431,7 @@
                 descripcion: "Dos tonos de contorno en polvo. Acabado mate natural. Tono 02.",
                 precio: 30000,
                 categoria: "maquillaje",
-                imagen: "https://bloomshell.co/wp-content/uploads/2026/08/Pagina-web-2-8.png"
+                imagenes: ["https://bloomshell.co/wp-content/uploads/2026/08/Pagina-web-2-8.png"]
             },
             {
                 id: 14,
@@ -1298,7 +1439,7 @@
                 descripcion: "Contorno líquido en crema. Fórmula cremosa para esculpir.",
                 precio: 20000,
                 categoria: "maquillaje",
-                imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpAr2J45L3x9j7jyeTqt3TiSoy23C66FqCMvoWlfSBXA&s=10"
+                imagenes: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpAr2J45L3x9j7jyeTqt3TiSoy23C66FqCMvoWlfSBXA&s=10"]
             },
             // ============ LABIOS ============
             {
@@ -1307,7 +1448,7 @@
                 descripcion: "Aceite labial glossy, aroma sandía. Vitamina E + Aceites emolientes. Tonos 04, 06.",
                 precio: 15000,
                 categoria: "labios",
-                imagen: "https://tucatalogodemaquillaje.com/wp-content/uploads/2025/11/lip-oil-sandia-trendy.jpg"
+                imagenes: ["https://tucatalogodemaquillaje.com/wp-content/uploads/2025/11/lip-oil-sandia-trendy.jpg"]
             },
             {
                 id: 16,
@@ -1315,7 +1456,7 @@
                 descripcion: "Gloss con destellos holográficos. 4 tonos. Partículas holográficas + Aceites.",
                 precio: 15000,
                 categoria: "labios",
-                imagen: "https://http2.mlstatic.com/D_NQ_NP_611854-MCO109218117590_042026-O.webp"
+                imagenes: ["https://http2.mlstatic.com/D_NQ_NP_611854-MCO109218117590_042026-O.webp"]
             },
             {
                 id: 17,
@@ -1323,7 +1464,7 @@
                 descripcion: "Gloss brillante, aroma cereza. Varios tonos. Agentes humectantes + Aceites.",
                 precio: 12000,
                 categoria: "labios",
-                imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK7bZTOj4OKF4o04cvmN6u9TbIA4DK1wzD_U_lq85HgQ&s"
+                imagenes: ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK7bZTOj4OKF4o04cvmN6u9TbIA4DK1wzD_U_lq85HgQ&s"]
             }
         ];
 
@@ -1332,6 +1473,8 @@
         let carrito = [];
         let categoriaActual = 'all';
         let productoModalActual = null;
+        let slideActual = 0;
+        let totalSlides = 0;
 
         const titulosCategoria = {
             'all': 'Todos los Productos',
@@ -1370,8 +1513,8 @@
 
             grid.innerHTML = filtrados.map((p, index) => {
                 let contenidoImagen = '';
-                if (p.imagen && p.imagen.trim() !== "") {
-                    contenidoImagen = `<img src="${p.imagen}" alt="${p.nombre}" class="product-image" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">`;
+                if (p.imagenes && p.imagenes.length > 0 && p.imagenes[0].trim() !== "") {
+                    contenidoImagen = `<img src="${p.imagenes[0]}" alt="${p.nombre}" class="product-image" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">`;
                 }
                 
                 const clickable = `onclick="openProductModal(${p.id})"`;
@@ -1379,7 +1522,7 @@
                 return `
                 <div class="product-card" style="animation-delay: ${index * 0.08}s;">
                     <div class="product-image-container" ${clickable}>
-                        <div class="product-icon-placeholder" style="${p.imagen ? 'display:none;' : 'display:block;'}">🧴</div>
+                        <div class="product-icon-placeholder" style="${p.imagenes && p.imagenes[0] ? 'display:none;' : 'display:block;'}">🧴</div>
                         ${contenidoImagen}
                     </div>
                     <div class="product-info">
@@ -1476,9 +1619,7 @@
             const p = productos.find(prod => prod.id === id);
             if (!p) return;
             productoModalActual = p;
-            
-            document.getElementById('modalImage').src = p.imagen || '';
-            document.getElementById('modalImage').alt = p.nombre;
+            slideActual = 0;
             
             let catNombre = 'Producto';
             if (p.categoria === 'skincare') catNombre = 'Skincare Coreano';
@@ -1490,7 +1631,71 @@
             document.getElementById('modalDesc').textContent = p.descripcion;
             document.getElementById('modalPrice').textContent = '$' + p.precio.toLocaleString('es-CO');
             
+            const track = document.getElementById('carouselTrack');
+            const dotsContainer = document.getElementById('carouselDots');
+            const imagenes = p.imagenes || [];
+            
+            totalSlides = imagenes.length;
+            track.innerHTML = imagenes.map(img => `
+                <div class="carousel-slide">
+                    <img src="${img}" alt="${p.nombre}" onerror="this.parentElement.innerHTML='<div style=\\'font-size:6rem;color:#E6C878;opacity:0.5;\\'>🧴</div>'">
+                </div>
+            `).join('');
+            
+            if (totalSlides > 1) {
+                dotsContainer.innerHTML = imagenes.map((_, i) => `
+                    <div class="carousel-dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></div>
+                `).join('');
+            } else {
+                dotsContainer.innerHTML = '';
+            }
+            
+            const tiktokBtn = document.getElementById('tiktokBtn');
+            if (p.tiktok) {
+                tiktokBtn.href = p.tiktok;
+                tiktokBtn.style.display = 'inline-flex';
+            } else {
+                tiktokBtn.style.display = 'none';
+            }
+            
+            const prevBtn = document.querySelector('.carousel-btn.prev');
+            const nextBtn = document.querySelector('.carousel-btn.next');
+            if (totalSlides <= 1) {
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+            } else {
+                prevBtn.style.display = 'flex';
+                nextBtn.style.display = 'flex';
+            }
+            
+            actualizarCarrusel();
             document.getElementById('productModal').classList.add('active');
+        }
+
+        function actualizarCarrusel() {
+            const track = document.getElementById('carouselTrack');
+            track.style.transform = `translateX(-${slideActual * 100}%)`;
+            
+            document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === slideActual);
+            });
+        }
+
+        function nextSlide(event) {
+            if (event) event.stopPropagation();
+            slideActual = (slideActual + 1) % totalSlides;
+            actualizarCarrusel();
+        }
+
+        function prevSlide(event) {
+            if (event) event.stopPropagation();
+            slideActual = (slideActual - 1 + totalSlides) % totalSlides;
+            actualizarCarrusel();
+        }
+
+        function goToSlide(index) {
+            slideActual = index;
+            actualizarCarrusel();
         }
 
         function closeProductModal(event) {
