@@ -323,7 +323,7 @@ footer .star{--s:16px}
       <h2 id="mTitle"></h2>
       <p class="pdesc" id="mDesc"></p>
       <div class="pprice" id="mPrice"></div>
-      <div id="vSel" style="display:none"><span class="vl">Escoge tu tono</span><div class="vopts" id="vOpts"></div></div>
+      <div id="vSel" style="display:none"><span class="vl" id="vl">Escoge tu tono</span><div class="vopts" id="vOpts"></div></div>
       <button class="btn" id="mAdd" onclick="addModal()">Agregar al Carrito</button>
       <a class="link" id="tkBtn" target="_blank">Ver video en TikTok</a>
       <a class="link" id="vdBtn" target="_blank">Ver video</a>
@@ -356,19 +356,21 @@ const productos=[
 {id:18,nombre:"Pestañina Prosa",descripcion:"Máscara de pestañas de larga duración con fórmula resistente al agua y al sudor. Define, alarga y da volumen sin grumos ni sensación pesada.",componentes:"Cera de Carnauba + Provitamina B5",precio:21500,categoria:"maquillaje",marca:"prosa",variantes:["Rosada","Gris Clarito"],imagenes:["https://tiendasmartina.com/cdn/shop/files/prosamaxsilicon.png?v=1785450136&width=1200","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf9WIKPmBUtaT3ZJPGLd0u5A2vHvtNrnvvLX6dWRLd9Q&s=10","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRcm0yOfGQkHN7PiUEvXMZ7MxmqAkzFWp-9PtofjZCoGxRRzJglGF7sUk&s=10"]},
 {id:22,nombre:"Papeletas Quita Grasa OG",descripcion:"Papelitos matificantes que absorben el exceso de grasa y brillo del rostro al instante.",componentes:"Fibra Natural Absorbente + Carbón Activado",precio:11000,categoria:"maquillaje",marca:"og",imagenes:["https://ogmantra.co/cdn/shop/files/PAPELES.jpg?v=1730129202"]},
 {id:23,nombre:"Serum Blush Flushy Blushy de Anik",descripcion:"Rubor líquido tipo sérum con acabado natural y luminoso. Disponible en dos tonos: 03 Toasty y 04 That Girl.",componentes:"Ácido Hialurónico + Vitamina E",precio:28000,categoria:"maquillaje",marca:"anik",variantes:["03 Toasty","04 That Girl"],imagenes:["https://anikmakeup.com/cdn/shop/files/9_c7be5a25-53ff-4cf5-a7f4-d03ae39d4e58.jpg?v=1772816298","https://anikmakeup.com/cdn/shop/files/5_5.jpg?v=1791313346","https://anikmakeup.com/cdn/shop/files/10_32230229-d2af-44c7-9c40-54950e0277ce.jpg?v=1772816298"]},
+{id:27,nombre:"Brochas Maange",descripcion:"Brochas de maquillaje Maange. Elige el kit completo o llévalas por separado, a tu gusto.",precio:5000,categoria:"maquillaje",marca:"maange",opciones:[{nombre:"Kit completo",precio:25000},{nombre:"Brocha individual",precio:5000}],imagenes:["https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQOSTrW1WDu3zshzmUkLQx1xnJgjTjlbo62XNBAzPRoxCxMhV-s","https://img.ltwebstatic.com/v4/j/spmp/2025/08/11/ec/1754892860d5ceb4a09e139afa45812dfc16a346fb_thumbnail_750x999.webp"]},
 {id:19,nombre:"Lip Oil Sandía – Trendy by Camila Orrego",descripcion:"Aceite labial glossy, aroma sandía. Tonos 04, 06.",componentes:"Vitamina E + Aceites Emolientes",precio:15000,categoria:"labios",marca:"trendy",imagenes:["https://tucatalogodemaquillaje.com/wp-content/uploads/2025/11/lip-oil-sandia-trendy.jpg"]},
 {id:20,nombre:"Brillo de Labios HoloGlam - Trendy",descripcion:"Gloss con destellos holográficos. 4 tonos.",componentes:"Partículas Holográficas + Aceites",precio:15000,categoria:"labios",marca:"trendy",imagenes:["https://http2.mlstatic.com/D_NQ_NP_611854-MCO109218117590_042026-O.webp"]},
-{id:21,nombre:"Brillo Cherry Shine Trendy by Camila Orrego",descripcion:"Gloss brillante, aroma cereza. Varios tonos.",componentes:"Agentes Humectantes + Aceites",precio:12000,categoria:"labios",marca:"trendy",imagenes:["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK7bZTOj4OKF4o04cvmN6u9TbIA4DK1wzD_U_lq85HgQ&s"]}
+{id:21,nombre:"Brillo Cherry Shine Trendy by Camila Orrego",descripcion:"Gloss brillante, aroma cereza. Varios tonos.",componentes:"Agentes Humectantes + Aceites",precio:12000,categoria:"labios",marca:"trendy",imagenes:["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK7bZTOj4OKF4o04cvmN6u9TbIA4DK1wzD_U_lq85HgQ&s"]},
+{id:28,nombre:"Lápiz de Labios Resistente al Agua Pudaier New Fashion Stereoscopic",descripcion:"Lápiz de labios resistente al agua de la línea New Fashion Stereoscopic de Pudaier.",precio:3500,categoria:"labios",marca:"pudaier",imagenes:["https://http2.mlstatic.com/D_NQ_NP_734561-MLM88862509650_082025-O.webp","https://m.media-amazon.com/images/I/71fEkefX4KL.jpg"]}
 ];
 const WA="573332267596";
 const titulos={all:'Todos los Productos',skincare:'Skincare Coreano',maquillaje:'Maquillaje Profesional',labios:'Labios & Gloss'};
-const marcas={skin1004:'Skin1004',mixsoon:'Mixsoon',biodance:'Biodance',medicube:'Medicube',cosrx:'COSRX',trendy:'Trendy',bloomshell:'Bloomshell',prosa:'Prosa',anik:'Anik',og:'OG',soleva:'Soleva'};
+const marcas={skin1004:'Skin1004',mixsoon:'Mixsoon',biodance:'Biodance',medicube:'Medicube',cosrx:'COSRX',trendy:'Trendy',bloomshell:'Bloomshell',prosa:'Prosa',anik:'Anik',og:'OG',soleva:'Soleva',maange:'Maange',pudaier:'Pudaier'};
 const $=id=>document.getElementById(id);
 const fmt=n=>'$'+n.toLocaleString('es-CO');
 let carrito=[],cat='all',marca=null,pActual=null,vSel=null,slide=0,total=0;
 const qtys={};
 const pf=p=>p.precioFinal!==undefined?p.precioFinal:p.descuento?Math.round(p.precio*(1-p.descuento/100)):p.precio;
-const precioHTML=p=>(p.descuento||p.precioFinal!==undefined)?`<s class="antes">${fmt(p.precio)}</s><b class="ahora">${fmt(pf(p))}</b>`:fmt(p.precio);
+const precioHTML=p=>p.opciones?`Desde ${fmt(Math.min(...p.opciones.map(o=>o.precio)))}`:(p.descuento||p.precioFinal!==undefined)?`<s class="antes">${fmt(p.precio)}</s><b class="ahora">${fmt(pf(p))}</b>`:fmt(p.precio);
 
 /* menú y búsqueda */
 function toggleMenu(){$('sidebar').classList.toggle('on');$('overlay').classList.toggle('on')}
@@ -390,13 +392,13 @@ function render(){
   $('banMaq').classList.toggle('on',!marca&&cat==='maquillaje');
   const l=productos.filter(p=>marca?p.marca===marca:cat==='all'||p.categoria===cat);
   $('grid').innerHTML=l.length?l.map(p=>{
-    const ton=p.variantes&&!p.agotado,q=!p.agotado&&!ton;
+    const ton=(p.variantes||p.opciones)&&!p.agotado,q=!p.agotado&&!ton;
     return `<article class="card ${p.agotado?'ago':''}">
       <div class="card-img" onclick="openModal(${p.id})">${p.descuento?`<span class="bdg d">-${p.descuento}%</span>`:''}${p.agotado?'<span class="bdg a">Agotado</span>':''}<img referrerpolicy="no-referrer" src="${p.imagenes[0]}" alt="${p.nombre}" onerror="this.style.display='none'"></div>
       <div class="card-top"><h3>${p.nombre}</h3><div class="precio">${precioHTML(p)}</div></div>
       <p class="desc">${p.descripcion.substring(0,100)}${p.descripcion.length>100?'...':''}</p>
       <div class="acts">${q?`<div class="qty"><button onclick="qty(${p.id},-1)" aria-label="Menos">−</button><span id="q${p.id}">1</span><button onclick="qty(${p.id},1)" aria-label="Más">+</button></div>`:''}
-      <button class="btn" ${p.agotado?'disabled':''} onclick="${ton?`openModal(${p.id})`:`agregar(${p.id},null,${q?`qtys[${p.id}]||1`:1},this)`}">${p.agotado?'Agotado':ton?'Elegir tono':'Agregar'}</button></div>
+      <button class="btn" ${p.agotado?'disabled':''} onclick="${ton?`openModal(${p.id})`:`agregar(${p.id},null,${q?`qtys[${p.id}]||1`:1},this)`}">${p.agotado?'Agotado':ton?(p.opciones?'Ver opciones':'Elegir tono'):'Agregar'}</button></div>
     </article>`}).join(''):'<div class="empty" style="grid-column:1/-1">Sin resultados</div>';
 }
 function qty(id,d){qtys[id]=Math.max(1,(qtys[id]||1)+d);$('q'+id).textContent=qtys[id]}
@@ -406,8 +408,8 @@ function filtrarMarca(m){marca=m;cat='all';render();$('sec').scrollIntoView({beh
 /* carrito */
 function agregar(id,variante,cant,btn){
   const p=productos.find(x=>x.id===id);if(!p||p.agotado)return;
-  const v=variante||(p.variantes?p.variantes[0]:null),it=carrito.find(i=>i.id===id&&i.variante===v);
-  if(it)it.cantidad+=cant;else carrito.push({...p,cantidad:cant,variante:v,precioFinal:pf(p)});
+  const v=variante||(p.opciones?p.opciones[0].nombre:p.variantes?p.variantes[0]:null),pr=p.opciones?p.opciones.find(o=>o.nombre===v).precio:pf(p),it=carrito.find(i=>i.id===id&&i.variante===v);
+  if(it)it.cantidad+=cant;else carrito.push({...p,cantidad:cant,variante:v,precioFinal:pr});
   if(qtys[id]){qtys[id]=1;const e=$('q'+id);if(e)e.textContent=1}
   actualizar();
   if(btn){const t=btn.textContent;btn.textContent='✓ Agregado';btn.classList.add('ok');setTimeout(()=>{btn.textContent=t;btn.classList.remove('ok')},1200)}
@@ -428,13 +430,13 @@ function closeCart(){$('cartModal').classList.remove('on')}
 /* modal de producto */
 function openModal(id){
   const p=productos.find(x=>x.id===id);if(!p)return;
-  pActual=p;slide=0;vSel=p.variantes?p.variantes[0]:null;
+  pActual=p;slide=0;vSel=p.opciones?p.opciones[0].nombre:p.variantes?p.variantes[0]:null;
   $('mCat').textContent={skincare:'Skincare Coreano',maquillaje:'Maquillaje',labios:'Labios & Gloss'}[p.categoria]||'Producto';
   $('mTitle').textContent=p.nombre;
   $('mDesc').innerHTML=p.descripcion+(p.componentes?`<br><br><b>Componentes activos:</b><br>${p.componentes}`:'');
-  $('mPrice').innerHTML=precioHTML(p);
-  $('vSel').style.display=p.variantes?'block':'none';
-  $('vOpts').innerHTML=(p.variantes||[]).map((v,i)=>{
+  $('mPrice').innerHTML=p.opciones?fmt(p.opciones[0].precio):precioHTML(p);
+  $('vSel').style.display=(p.variantes||p.opciones)?'block':'none';$('vl').textContent=p.opciones?'Escoge tu opción de compra':'Escoge tu tono';
+  $('vOpts').innerHTML=p.opciones?p.opciones.map((o,i)=>`<div class="vopt ${i?'':'on'}" onclick="elegirVar('${o.nombre}',this)">${o.nombre}<br><b>${fmt(o.precio)}</b></div>`).join(''):(p.variantes||[]).map((v,i)=>{
     const l=v.toLowerCase(),c=l.includes('rosa')?'#E8B5B5':l.includes('toasty')?'#C28C7A':l.includes('that girl')?'#E5A5A5':'#C9C9C9';
     return `<div class="vopt ${i?'':'on'}" onclick="elegirVar('${v}',this)"><span class="vc" style="background:${c}"></span>${v}</div>`}).join('');
   total=p.imagenes.length;
@@ -446,7 +448,7 @@ function openModal(id){
   const b=$('mAdd');b.disabled=!!p.agotado;b.textContent=p.agotado?'Agotado':'Agregar al Carrito';
   ir(0);$('pModal').classList.add('on');
 }
-function elegirVar(v,el){vSel=v;document.querySelectorAll('.vopt').forEach(o=>o.classList.remove('on'));el.classList.add('on')}
+function elegirVar(v,el){vSel=v;document.querySelectorAll('.vopt').forEach(o=>o.classList.remove('on'));el.classList.add('on');if(pActual&&pActual.opciones)$('mPrice').innerHTML=fmt(pActual.opciones.find(o=>o.nombre===v).precio)}
 function ir(i){slide=i;$('track').style.transform=`translateX(-${i*100}%)`;document.querySelectorAll('.dot').forEach((d,k)=>d.classList.toggle('on',k===i))}
 function mover(d){ir((slide+d+total)%total)}
 function closeModal(){$('pModal').classList.remove('on');pActual=null}
